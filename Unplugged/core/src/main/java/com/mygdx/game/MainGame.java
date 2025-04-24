@@ -38,11 +38,11 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Play implements Screen{
+public class MainGame implements Screen{
     private TiledMap mainMap;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-    private Player player;
+    private MainPlayer player;
     private Texture all;
     private Texture reversedAll;
     private static final int FRAME_COLS = 8, FRAME_ROWS = 9;
@@ -57,7 +57,7 @@ public class Play implements Screen{
     @Override
     public void show() {
         TmxMapLoader loader = new TmxMapLoader();
-        mainMap = loader.load("assets/maps/mainMap.tmx");
+        mainMap = loader.load("assets/MainGameAssests/maps/mainMap.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(mainMap);
         sr = new ShapeRenderer();
@@ -66,11 +66,11 @@ public class Play implements Screen{
 
         camera = new OrthographicCamera();
 
-        all = new Texture("assets/AnimationSheet_Character.png");
-        reversedAll = new Texture("assets/AnimationSheet_Character_Reversed.png");
+        all = new Texture("assets/MainGameAssests/AnimationSheet_Character.png");
+        reversedAll = new Texture("assets/MainGameAssests/AnimationSheet_Character_Reversed.png");
         TextureRegion[][] tmp = TextureRegion.split(all, all.getWidth() / FRAME_COLS, all.getHeight() / FRAME_ROWS);
         TextureRegion[][] tmpReversed = TextureRegion.split(reversedAll, reversedAll.getWidth() / FRAME_COLS, reversedAll.getHeight() / FRAME_ROWS);
-        player = new Player((TiledMapTileLayer)mainMap.getLayers().get(0), tmp, tmpReversed);
+        player = new MainPlayer((TiledMapTileLayer)mainMap.getLayers().get(0), tmp, tmpReversed);
         player.setPosition(9 * player.getCollisionLayer().getTileWidth(), (player.getCollisionLayer().getHeight() - 24) * player.getCollisionLayer().getTileHeight());
 
         Gdx.input.setInputProcessor(player);

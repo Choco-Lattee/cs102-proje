@@ -16,7 +16,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends Sprite implements InputProcessor {
+public class MainPlayer extends Sprite implements InputProcessor {
     //* the movement velocity */
     private Vector2 velocity = new Vector2();
     private float animationTime = 0, increment;
@@ -27,7 +27,7 @@ public class Player extends Sprite implements InputProcessor {
     private static final int FRAME_COLS = 8, FRAME_ROWS = 9;
     private Animation<TextureRegion> stillRight, stillLeft, idle, walkRight, walkLeft, jumpRight, jumpLeft;
 
-    public Player( TiledMapTileLayer collisionLayer, TextureRegion[][] tmp, TextureRegion[][] tmpReversed) {
+    public MainPlayer( TiledMapTileLayer collisionLayer, TextureRegion[][] tmp, TextureRegion[][] tmpReversed) {
         super(tmp[0][0]);
         TextureRegion[] stillRightFrames = new TextureRegion[2];
         TextureRegion[] stillLeftFrames = new TextureRegion[2];
