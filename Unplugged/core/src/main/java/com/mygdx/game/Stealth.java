@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.physics.box2d.World;
 import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
-public class Play implements Screen{
+public class Stealth implements Screen{
 
     private World world;
     private Box2DDebugRenderer box2dDebugRenderer;
