@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class Player extends Sprite implements InputProcessor{
+public class BigBoss extends Sprite implements InputProcessor{
     
     private Animation<TextureRegion> walking;
     private Body box;
