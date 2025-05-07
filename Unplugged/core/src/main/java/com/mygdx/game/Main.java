@@ -1,51 +1,14 @@
 package io.github.some_example_name;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.ScreenUtils;
+//import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+//import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
-
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends Game {
-
-    @Override
-    public void create() {
-        setScreen(new Play());
+public class Main {
+    public static void main (String[] arg) {
+        //LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+       /*  config.title = "Detective Minigame";
+        config.width = 960;
+        config.height = 540;*/
+        //new LwjglApplication(new CrimeSceneGame(), config);
     }
-
-    @Override
-    public void render() {
-        super.render();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
-
-    @Override
-    public void resize(int witdh, int height){
-        super.resize(witdh, height);
-    }
-
-    @Override
-    public void pause() {
-        super.pause();
-    }
-
-    @Override
-    public void resume() {
-        super.resume();
-    }
-
 }
