@@ -1,0 +1,106 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "box2d_map.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "#background": {
+            "scaleInDock": 1
+        },
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/BG_1.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/BG_2.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/BG_3.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/Free.tmx": {
+            "scale": 0.45562065972222215,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 382.9940462014765,
+                "y": -190.9483210288164
+            }
+        },
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/Terrain_and_Props.tsx": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 820.6666666666667,
+                "y": 805.3333333333333
+            }
+        },
+        "box2d_map.tmx#alex": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#background": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#oak_wood_tiles": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#shop": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 820.6666666666665,
+                "y": 737.3333333333333
+            }
+        },
+        "mainMap.tmx#Layer_0005_5": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#clouds": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#foreground": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#heart": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#oak woods": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#shop": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#sky": {
+            "scaleInDock": 1
+        },
+        "mainMap.tmx#terrain": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "C:/Users/TalhaK/OneDrive/Desktop/CS/ParkourGame/assets/maps",
+    "map.fixedSize": true,
+    "map.height": 34,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 60,
+    "openFiles": [
+        "box2d_map.tmx",
+        "mainMap.tmx"
+    ],
+    "project": "box2d_map.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "mainMap.tmx",
+        "box2d_map.tmx",
+        "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/Free.tmx"
+    ],
+    "tileset.embedInMap": true
+}

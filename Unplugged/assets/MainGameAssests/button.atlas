@@ -1,0 +1,9 @@
+button.png
+size:132,132
+repeat:none
+button.normal
+bounds:0,0,48,16
+button.pressed
+bounds:48,0,48,16
+menu
+bounds:0,16,132,116
