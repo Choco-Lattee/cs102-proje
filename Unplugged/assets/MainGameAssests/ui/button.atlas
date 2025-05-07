@@ -1,0 +1,15 @@
+
+button.png
+size: 128, 128
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+button_1_interrogate
+  rotate: false
+  xy: 1, 69
+  size: 100, 30
+  split: 69, 0, 0, 0
+  pad: 0, 0, 0, 0
+  orig: 100, 30
+  offset: 0, 0
+  index: -1
