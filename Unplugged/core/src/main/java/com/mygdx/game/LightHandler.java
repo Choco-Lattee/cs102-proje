@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
