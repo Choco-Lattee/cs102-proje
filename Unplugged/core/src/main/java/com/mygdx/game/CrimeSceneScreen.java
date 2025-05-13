@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 

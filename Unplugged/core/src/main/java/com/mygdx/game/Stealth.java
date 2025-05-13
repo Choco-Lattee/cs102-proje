@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -24,7 +24,7 @@ public class Stealth implements Screen{
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-    private Player player;
+    private BigBoss player;
     private Box2DMapObjectParser parser;
     private Texture walking;
     private TextureAtlas atlas;
@@ -42,7 +42,7 @@ public class Stealth implements Screen{
         parser = new Box2DMapObjectParser();
         parser.load(world, map);
 
-        player = new Player(new Sprite(new Texture("idle1.jpeg")), atlas);
+        //player = new BigBoss(new Sprite(new Texture("idle1.jpeg")), atlas);
         player.setPosition(1100f, 250);
         Gdx.input.setInputProcessor(player);
 

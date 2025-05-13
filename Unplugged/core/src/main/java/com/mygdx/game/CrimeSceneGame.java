@@ -1,5 +1,4 @@
-package io.github.some_example_name;
-
+package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

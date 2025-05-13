@@ -454,7 +454,7 @@ public class MainGameMap3 implements Screen {
                         break;
                     case Keys.K:
                         if (canPassNextGame) {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new SubgameMenu());
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new CrimeSceneScreen(new CrimeSceneGame()));
                         }
                 }
                 return false;
