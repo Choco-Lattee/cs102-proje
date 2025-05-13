@@ -1,0 +1,48 @@
+3.png
+size:4096,512
+repeat:none
+IDLES_5_frames
+bounds:1540,294,960,24
+T8+4Au
+bounds:2858,12,630,400
+Tank
+bounds:3928,273,70,76
+WALKING_3_frames
+bounds:2,134,576,24
+all animations sprite sheet
+bounds:2,414,3864,92
+attack
+bounds:3808,2,58,410
+basic furnace all animations
+bounds:2,254,1536,64
+basic furnace opening and closing
+bounds:1540,228,384,64
+basic furnace turning off
+bounds:924,122,320,64
+basic furnace turning on
+bounds:1926,228,320,64
+basic furnace working
+bounds:924,188,512,64
+building_1 animation
+bounds:2,8,368,124
+building_2 Sprite
+bounds:3868,351,166,155
+building_3 Sprite
+bounds:3490,29,76,125
+closing animation sheet
+bounds:2,320,1564,92
+damaged and death
+bounds:3748,84,58,328
+dungeon tileset(1)
+bounds:372,36,128,96
+opened idle animation sheet
+bounds:2,160,920,92
+openning animation sheet
+bounds:1568,320,1288,92
+run
+bounds:4036,260,58,246
+tumblr_nx7nljX7Om1qzl9pho1
+index:400
+bounds:3490,156,256,256
+wake
+bounds:3868,103,58,246

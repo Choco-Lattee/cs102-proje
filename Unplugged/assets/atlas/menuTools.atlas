@@ -1,0 +1,15 @@
+menuTools.png
+size:256,128
+repeat:none
+button.normal
+bounds:136,82,48,16
+button.pressed
+bounds:201,102,48,16
+menu
+bounds:2,2,132,116
+oneHeart
+bounds:136,42,19,18
+threeHeart
+bounds:136,100,63,18
+twoHeart
+bounds:136,62,41,18
