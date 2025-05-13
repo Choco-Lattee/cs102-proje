@@ -8,8 +8,8 @@ Microwave/Attack.png
 Microwave/AttackRight.png
 Microwave/Death.png
 Microwave/DeathRight.png
-Microwave/Fireball Explosion.png
-Microwave/Fireball ExplosionRight.png
+Microwave/Fireball_Explosion.png
+Microwave/Fireball_ExplosionRight.png
 Microwave/Fireball_loop.png
 Microwave/Fireball_loopRight.png
 Microwave/Hit.png
@@ -40,15 +40,19 @@ font/white.fnt
 font/white_0.png
 font/white_1.png
 font/white_2.png
+fontZip.zip
 maps/Alex_idle_16x16.png
 maps/Heart.png
 maps/Layer_0002_7.png
 maps/Layer_0003_6.png
 maps/Layer_0005_5.png
 maps/Terrain_and_Props.png
+maps/Terrain_and_Props_Reverse.png
 maps/background_layer_1.png
 maps/background_layer_2.png
 maps/background_layer_3.png
+maps/boat.png
+maps/boat_reversed.png
 maps/box2d_map.tiled-project
 maps/box2d_map.tiled-session
 maps/box2d_map.tmx
@@ -57,7 +61,14 @@ maps/clouds.png
 maps/fence_2.png
 maps/grass_3.png
 maps/lamp.png
+maps/lampp.png
+maps/lava_top.png
+maps/lavas.png
 maps/mainMap.tmx
+maps/mainMap2.tiled-project
+maps/mainMap2.tiled-session
+maps/mainMap2.tmx
+maps/mainMap3.tmx
 maps/oak_woods_tileset.png
 maps/rock_3.png
 maps/shop.png
@@ -66,12 +77,15 @@ maps/water1.png
 maps/water2.png
 maps/water3.png
 maps/water4.png
+maps/water5.png
+maps/waters.png
 menuSkin.json
 menuTools.atlas
 menuTools.png
 npc1.png
 settings_tools.atlas
 settings_tools.png
+ui.zip
 ui/FreeDemo.png
 ui/UiCozyFree.png
 ui/button.normal.png

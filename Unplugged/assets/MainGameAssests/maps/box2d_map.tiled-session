@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "box2d_map.tmx",
+    "activeFile": "mainMap3.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -37,9 +37,18 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 820.6666666666667,
-                "y": 805.3333333333333
+                "x": 1846,
+                "y": 845.3333333333333
             }
+        },
+        "box2d_map.tmx#Layer_0005_5": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#Terrain_and_Props": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#Terrain_and_Props_Reverse": {
+            "scaleInDock": 1
         },
         "box2d_map.tmx#alex": {
             "scaleInDock": 1
@@ -47,17 +56,41 @@
         "box2d_map.tmx#background": {
             "scaleInDock": 1
         },
+        "box2d_map.tmx#background_layer_2": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#clouds": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#lava_top": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#lavas": {
+            "scaleInDock": 1
+        },
         "box2d_map.tmx#oak_wood_tiles": {
             "scaleInDock": 1
         },
+        "box2d_map.tmx#rock_3": {
+            "scaleInDock": 1
+        },
         "box2d_map.tmx#shop": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#sign": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#water5": {
+            "scaleInDock": 1
+        },
+        "box2d_map.tmx#waters": {
             "scaleInDock": 1
         },
         "mainMap.tmx": {
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 820.6666666666665,
+                "x": 820.6666666666666,
                 "y": 737.3333333333333
             }
         },
@@ -84,6 +117,68 @@
         },
         "mainMap.tmx#terrain": {
             "scaleInDock": 1
+        },
+        "mainMap3.tmx": {
+            "scale": 0.77,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 2265.5844155844156,
+                "y": 771.4285714285714
+            }
+        },
+        "mainMap3.tmx#Layer_0002_7": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#Layer_0003_6": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#Layer_0005_5": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#Terrain_and_Props": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#Terrain_and_Props_Reverse": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#background_layer_1": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#background_layer_2": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#boat": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#boat_reversed": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#clouds": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#fence_2": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#lampp": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#lavas": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#oak_woods_tileset": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#rock_3": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#sign": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#water5": {
+            "scaleInDock": 1
+        },
+        "mainMap3.tmx#waters": {
+            "scaleInDock": 1
         }
     },
     "last.imagePath": "C:/Users/TalhaK/OneDrive/Desktop/CS/ParkourGame/assets/maps",
@@ -93,13 +188,15 @@
     "map.width": 60,
     "openFiles": [
         "box2d_map.tmx",
-        "mainMap.tmx"
+        "mainMap.tmx",
+        "mainMap3.tmx"
     ],
     "project": "box2d_map.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "mainMap.tmx",
         "box2d_map.tmx",
+        "mainMap.tmx",
+        "mainMap3.tmx",
         "C:/Users/TalhaK/AppData/Local/Temp/af77614b-e67a-4bef-a88c-d25cdcfefb82_forest-nature-fantasy-tileset-free.zip.b82/Fantasy Swamp Forest/Free/Free.tmx"
     ],
     "tileset.embedInMap": true
