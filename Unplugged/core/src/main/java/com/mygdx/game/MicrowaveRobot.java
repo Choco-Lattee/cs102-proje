@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Plane.PlaneSide;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ChainShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -21,11 +22,12 @@ import com.badlogic.gdx.physics.box2d.World;
 public class MicrowaveRobot extends Sprite {
     private Vector2 velocity;
     private float speed = 30;
-    private float animationTime = 0, deathTime = 0, fireballTime = 0;
+    private float animationTime = 0, deathTime = 0, fireballTime = 0, posX, posY;
     private Body body;
     private World world;
     private BodyDef bodyDef;
     private FixtureDef fixtureDef, footDef;
+    private Fixture fixture;
     private PolygonShape polygonShape;
     private boolean lastWayRight = true, right = true, targetDetected = false, death = false;;
     private Animation<TextureRegion> currentAnimation;
@@ -33,7 +35,7 @@ public class MicrowaveRobot extends Sprite {
     deathAniRight, attackLeft, attackRight, fireballLoopLeft, fireballExpLeft;
     private ArrayList<Fireball> fireballs; 
 
-    public MicrowaveRobot(World world, Texture stillTex) {
+    public MicrowaveRobot(World world, Texture stillTex, float x, float y) {
         super(stillTex);
         Texture stillLeftTex = new Texture("assets/Microwave/Idle.png");
         Texture stillRightTex = new Texture("assets/Microwave/IdleRight.png");
@@ -131,6 +133,8 @@ public class MicrowaveRobot extends Sprite {
         this.setSize(12f * 2, 12f * 2);
         this.setOrigin(this.getWidth() / 2, this.getHeight() / 2);
         velocity = new Vector2();
+        posX = x;
+        posY = y;
         createBodyDef();
         createBodyShape();
         createFixtureDef();
@@ -142,7 +146,7 @@ public class MicrowaveRobot extends Sprite {
     private void createBodyDef() {
         bodyDef = new BodyDef();
         bodyDef.type = BodyType.DynamicBody;
-        bodyDef.position.set(80, 70);
+        bodyDef.position.set(posX, posY);
         bodyDef.fixedRotation = true;
     }
 
@@ -170,7 +174,7 @@ public class MicrowaveRobot extends Sprite {
 
     public void createBody() {
         body = world.createBody(bodyDef);
-        body.createFixture(fixtureDef);
+        fixture = body.createFixture(fixtureDef);
         body.setUserData(this);
         body.applyAngularImpulse(5, true);
     }
@@ -186,7 +190,8 @@ public class MicrowaveRobot extends Sprite {
     }
 
     public void update(float delta, MyContactListener listener, Box2DPlayer player) {
-        if(listener.onContactWithRobotAndPlayer()) {
+        if(listener.onContactWithRobotAndPlayer() && (listener.getLastPos1Robot().getBody().equals(body) || listener.getLastPos2Robot().getBody().equals(body))) {
+            player.setPoint(250);
             deathTime += delta;
         }
         if (deathTime > 0.4f && !death) {
@@ -199,10 +204,10 @@ public class MicrowaveRobot extends Sprite {
         if (!right) {
             velocity.x = -speed;
         }
-        if (Math.abs(body.getPosition().x-60) <= 2) {
+        if (Math.abs(body.getPosition().x-(posX-15)) <= 2) {
             right = true;
         }
-        if (Math.abs(body.getPosition().x-90) <= 2) {
+        if (Math.abs(body.getPosition().x-(posX+15)) <= 2) {
             right = false;
         }
 

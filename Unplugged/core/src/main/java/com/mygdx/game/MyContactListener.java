@@ -11,6 +11,9 @@ public class MyContactListener implements ContactListener{
     private boolean isContactWithRobot;
     private boolean contactWithNPC;
     private boolean contactWithFireball;
+    private boolean contactWithWater;
+    private boolean contactWithLava;
+    private Fixture lastRobot1, lastRobot2;
 
     @Override
     public void beginContact(Contact contact) {
@@ -27,9 +30,13 @@ public class MyContactListener implements ContactListener{
         if (fa.getUserData() != null && fb.getUserData() != null) {
             if (fa.getUserData().equals("foot") && fb.getUserData().equals("robot")) {
                 isContactWithRobot = true;
+                lastRobot1 = fa;
+                lastRobot2 = fb;
             }
             if (fb.getUserData().equals("foot") && fa.getUserData().equals("robot")) {
                 isContactWithRobot = true;
+                lastRobot1 = fa;
+                lastRobot2 = fb;
             }
             if (fa.getUserData().equals("foot") && fb.getUserData().equals("npc")) {
                 contactWithNPC = true;
@@ -46,6 +53,22 @@ public class MyContactListener implements ContactListener{
             if (fb.getUserData().equals("foot") && fa.getUserData().equals("fireball")) {
                 contactWithFireball = true;
                 System.out.println("fireeee");
+            }
+            if (fa.getUserData().equals("foot") && fb.getUserData().equals("water")) {
+                contactWithWater = true;
+                System.out.println("water");
+            }
+            if (fb.getUserData().equals("foot") && fa.getUserData().equals("water")) {
+                contactWithWater = true;
+                System.out.println("water");
+            }
+            if (fa.getUserData().equals("foot") && fb.getUserData().equals("lava")) {
+                contactWithLava = true;
+                System.out.println("lava");
+            }
+            if (fb.getUserData().equals("foot") && fa.getUserData().equals("lava")) {
+                contactWithLava = true;
+                System.out.println("lava");
             }
         }
     }
@@ -80,6 +103,20 @@ public class MyContactListener implements ContactListener{
             if (fb.getUserData().equals("foot") && fa.getUserData().equals("fireball")) {
                 contactWithFireball = false;
             }
+            if (fa.getUserData().equals("foot") && fb.getUserData().equals("water")) {
+                contactWithWater = false;
+                System.out.println("water");
+            }
+            if (fb.getUserData().equals("foot") && fa.getUserData().equals("water")) {
+                contactWithWater = false;
+                System.out.println("water");
+            }
+            if (fa.getUserData().equals("foot") && fb.getUserData().equals("lava")) {
+                contactWithLava = false;
+            }
+            if (fb.getUserData().equals("foot") && fa.getUserData().equals("lava")) {
+                contactWithLava = false;
+            }
 
         }
     }
@@ -95,6 +132,20 @@ public class MyContactListener implements ContactListener{
     }
     public boolean onContactWithFireball() {
         return contactWithFireball;
+    }
+    public boolean onContactWithWater() {
+        return contactWithWater;
+    }
+    public boolean onContactWithLava() {
+        return contactWithLava;
+    }
+
+    public Fixture getLastPos1Robot() {
+        return lastRobot1;
+    }
+
+    public Fixture getLastPos2Robot() {
+        return lastRobot2;
     }
 
     @Override
