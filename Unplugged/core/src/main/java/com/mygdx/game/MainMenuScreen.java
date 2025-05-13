@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -68,7 +69,7 @@ public class MainMenuScreen implements Screen {
 
         exitButton.addListener(event -> {
             if (event.toString().equals("touchDown")) {
-                Gdx.app.exit();
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3());
             }
             return true;
         });

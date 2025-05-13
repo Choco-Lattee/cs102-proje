@@ -293,7 +293,7 @@ public class MainGameMap2 implements Screen {
                     case Keys.K:
                         if (canPassNextGame) {
                             GameData.savePlayerPosition(50, 70, player.getPoint(),  player.getHeart(), player.getCurrentMap(), game);
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3());
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen(new PuzzleGame()));
                         }
                     case Keys.P:
                         player.setPlayerPosition();
