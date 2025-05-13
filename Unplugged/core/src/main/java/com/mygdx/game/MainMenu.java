@@ -64,7 +64,7 @@ public class MainMenu implements Screen {
         batch = new SpriteBatch();
         stage = new Stage(viewport);
 
-        Texture splashTexture = new Texture("assets/Background.png");
+        Texture splashTexture = new Texture("assets/MainGameAssests/Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
