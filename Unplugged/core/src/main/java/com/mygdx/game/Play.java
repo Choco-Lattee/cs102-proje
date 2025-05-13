@@ -280,7 +280,14 @@ public class Play implements Screen{
                 return false;
             }
         }, player, pauseStage));
+        pauseStage.getExitButton().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+            }
+        });
     }
+    
 
     public void insertionSortY(ArrayList<Sprite> sprites){
         for(int i = 0; i < sprites.size(); i++){
@@ -407,8 +414,6 @@ public class Play implements Screen{
         cctv.getTexture().dispose();
         // doors.get(0).getTexture().dispose();
         // doors.get(0).getKey().getTexture().dispose();
-        door1.getTexture().dispose();
-        door1.getKey().getTexture().dispose();
     }
 
     @Override

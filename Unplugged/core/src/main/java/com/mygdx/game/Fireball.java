@@ -30,7 +30,7 @@ public class Fireball extends Sprite {
         super(tmp[0][0]);
         this.world = world;
         this.robot = robot;
-        Texture explosionTex = new Texture("Unplugged/assets/Microwave/Fireball_ExplosionRight.png");
+        Texture explosionTex = new Texture("assets/Microwave/Fireball_ExplosionRight.png");
         TextureRegion[][] explosionFr = TextureRegion.split(explosionTex, explosionTex.getWidth() / 7, explosionTex.getHeight() / 1);
         TextureRegion[] explosionLeftFrames = new TextureRegion[7];
         TextureRegion[] loopFrames = new TextureRegion[5];

@@ -46,7 +46,7 @@ public class SettingStage extends Stage{
 		super(viewport);
 
 
-        TextureAtlas atlas = new TextureAtlas("Unplugged/assets/settings_tools.atlas");
+        TextureAtlas atlas = new TextureAtlas("assets/settings_tools.atlas");
         skin = new Skin(atlas);
 
 
@@ -54,8 +54,8 @@ public class SettingStage extends Stage{
 		table.setBounds(0, 0, width, height);
         table.setBackground(skin.getDrawable("panel"));
 
-        BitmapFont white = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/white.fnt"), false);
-        BitmapFont black = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"), false);
+        BitmapFont white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
+        BitmapFont black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
 
         CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
         checkBoxStyle.checkboxOff = skin.getDrawable("checkbox_off");

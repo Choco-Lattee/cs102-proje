@@ -32,7 +32,7 @@ public class LoadMenu implements Screen {
 
         loadBatch = new SpriteBatch();
 
-        Texture splashTexture = new Texture("Unplugged/assets/Background.png");
+        Texture splashTexture = new Texture("assets/Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
