@@ -68,7 +68,7 @@ public class Play implements Screen{
     private Furnace furnace3;
     private Furnace furnace4;
     private ArrayList<Furnace> furnaces = new ArrayList<Furnace>();
-    private Npc[] npcs = new Npc[3];
+    private SNpc[] npcs = new SNpc[3];
     private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     private boolean playerDied = false;
     private boolean playerSucceed = false;
@@ -176,9 +176,9 @@ public class Play implements Screen{
             sprites.add(furnace);
         }
     //npc
-        npcs[0] = new Npc(atlas.findRegion("npc1"), 115f, 682, contactListener, 1, world);
-        npcs[1] = new Npc(atlas.findRegion("npc2"), 945f, 586, contactListener, 2, world);
-        npcs[2] = new Npc(atlas.findRegion("npc3"), 844f, 985, contactListener, 3, world);
+        npcs[0] = new SNpc(atlas.findRegion("npc1"), 115f, 682, contactListener, 1, world);
+        npcs[1] = new SNpc(atlas.findRegion("npc2"), 945f, 586, contactListener, 2, world);
+        npcs[2] = new SNpc(atlas.findRegion("npc3"), 844f, 985, contactListener, 3, world);
 
     //pause menu----------------------------------------------------------------------
         pauseCam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

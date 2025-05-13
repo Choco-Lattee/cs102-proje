@@ -14,6 +14,9 @@ public class MyContactListener implements ContactListener{
     private boolean contactWithWater;
     private boolean contactWithLava;
     private Fixture lastRobot1, lastRobot2;
+    private boolean[] areDoorsOpen = {false, false, false, false, false ,false};
+    private boolean[] contactWithDoors = {false, false, false, false, false ,false};
+    private boolean[] npcRescued = {false, false, false};
 
     @Override
     public void beginContact(Contact contact) {
@@ -70,6 +73,53 @@ public class MyContactListener implements ContactListener{
                 contactWithLava = true;
                 System.out.println("lava");
             }
+
+            if (fa.getUserData().equals("stealthNpc1") && fb.getUserData().equals("player")) {
+                npcRescued[0] = true;
+            }
+            if (fb.getUserData().equals("stealthNpc1") && fa.getUserData().equals("player")) {
+                npcRescued[0] = true;
+            }
+
+            if (fa.getUserData().equals("stealthNpc2") && fb.getUserData().equals("player")) {
+                npcRescued[1] = true;
+            }
+            if (fb.getUserData().equals("stealthNpc2") && fa.getUserData().equals("player")) {
+                npcRescued[1] = true;
+            }
+
+            if (fa.getUserData().equals("stealthNpc3") && fb.getUserData().equals("player")) {
+                npcRescued[2] = true;
+            }
+            if (fb.getUserData().equals("stealthNpc3") && fa.getUserData().equals("player")) {
+                npcRescued[2] = true;
+            }
+
+            try{
+                Integer.parseInt("" + fb.getUserData());
+                int temp = (int) fb.getUserData();
+
+                if (fa.getUserData().equals("player") && temp < 7 && !contactWithDoors[temp - 1]) {
+                    contactWithDoors[temp - 1] = true;
+                }
+                if (fa.getUserData().equals("player") && temp > 9 && !areDoorsOpen[temp / 10 - 1]) {
+                    areDoorsOpen[temp / 10 - 1] = true;
+                }
+            }
+            catch(NumberFormatException e){}
+
+            try{
+                Integer.parseInt("" + fa.getUserData());
+                int temp = (int) fa.getUserData();
+
+                if (fb.getUserData().equals("player") && temp < 7 && !contactWithDoors[temp - 1]) {
+                    contactWithDoors[temp - 1] = true;
+                }
+                if (fb.getUserData().equals("player") && temp > 9 && !areDoorsOpen[temp / 10 - 1]) {
+                    areDoorsOpen[temp / 10 - 1] = true;
+                }
+            }
+            catch(NumberFormatException e){}
         }
     }
 
@@ -118,6 +168,25 @@ public class MyContactListener implements ContactListener{
                 contactWithLava = false;
             }
 
+            try{
+                Integer.parseInt("" + fb.getUserData());
+                int temp = (int) fb.getUserData();
+
+                if (fa.getUserData().equals("player") && temp < 7 && contactWithDoors[temp - 1]) {
+                    contactWithDoors[temp - 1] = false;
+                }
+            }
+            catch(NumberFormatException e){}
+
+            try{
+                Integer.parseInt("" + fa.getUserData());
+                int temp = (int) fa.getUserData();
+
+                if (fb.getUserData().equals("player") && temp < 7 && areDoorsOpen[temp / 10 - 1]) {
+                    contactWithDoors[temp - 1] = false;
+                }
+            }
+            catch(NumberFormatException e){}
         }
     }
 
@@ -146,6 +215,17 @@ public class MyContactListener implements ContactListener{
 
     public Fixture getLastPos2Robot() {
         return lastRobot2;
+    }
+
+        public boolean[] getAreDoorsOpen() {
+        return areDoorsOpen;
+    }
+    public boolean[] getContactWithDoors() {
+        return contactWithDoors;
+    }
+
+    public boolean[] getNpcRescued() {
+        return npcRescued;
     }
 
     @Override

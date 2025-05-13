@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class Npc extends Sprite{
+public class SNpc extends Sprite{
 
     private BodyDef boxDef;
     private FixtureDef fixtureDef;
@@ -25,7 +25,7 @@ public class Npc extends Sprite{
     private MyContactListener contactListener;
     private int num;
 
-    public Npc(TextureRegion textureNpc, float x, float y, MyContactListener contactListener, int num, World world){
+    public SNpc(TextureRegion textureNpc, float x, float y, MyContactListener contactListener, int num, World world){
         super(textureNpc);
 
         setX(x);
