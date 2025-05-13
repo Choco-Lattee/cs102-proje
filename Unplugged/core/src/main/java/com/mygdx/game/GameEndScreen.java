@@ -109,7 +109,7 @@ public class GameEndScreen implements Screen{
                 stage.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap1()); 
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new LoadMenu()); 
                     }
                 })));
             }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Plane.PlaneSide;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -24,16 +25,17 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class Box2DPlayer extends Sprite implements InputProcessor{
-    protected static int jumpingKey = Keys.SPACE, speedingKey = Keys.SHIFT_LEFT;
+    protected static int up = Keys.W, speedingKey = Keys.SHIFT_LEFT, left = Keys.A, down = Keys.S, right = Keys.D;
 
     private Vector2 velocity, playerPosition;
-    private float speed = 150, gravity = 110, width, height;
-    private float animationTime = 0, countTime = 0, damageTime = 0, deathTime = 0;
-    private int heartNumber = 3;
+    private float speed = 100, gravity = 80, width, height;
+    private float density = 0.09f, animationTime = 0, countTime = 0, damageTime = 0, deathTime = 0;
+    private int heartNumber = 3, point = 0, currentMap = 0;
     private Body body;
     private World world;
     private BodyDef bodyDef;
     private FixtureDef fixtureDef, footDef;
+    private Fixture fixture;
     private PolygonShape polygonShape;
     private boolean canJump, lastWayRight = true, isDuck = false, onAttack = false, isDeath = false, hasTakenDamage = false;
     private  Animation<TextureRegion> currentAnimation;
@@ -139,9 +141,9 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         deathRight.setPlayMode(PlayMode.LOOP);
         deathLeft = new Animation<TextureRegion>(1 / 2f, deathLeftFrames);
         deathLeft.setPlayMode(PlayMode.LOOP);
-        damageRight = new Animation<TextureRegion>(1 / 2f, damageRightFrames);
+        damageRight = new Animation<TextureRegion>(3f, damageRightFrames);
         damageRight.setPlayMode(PlayMode.LOOP);
-        damageLeft = new Animation<TextureRegion>(1 / 2f, damageLeftFrames);
+        damageLeft = new Animation<TextureRegion>(3f, damageLeftFrames);
         damageLeft.setPlayMode(PlayMode.LOOP);
 
         this.playerPosition = new Vector2(playerPosition.x, playerPosition.y);
@@ -173,7 +175,7 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         fixtureDef.shape = polygonShape;
         fixtureDef.friction = .5f;
         fixtureDef.restitution = .2f;
-        fixtureDef.density = 0.09f;
+        fixtureDef.density = density;
     }
 
     private void createFootSensor() {
@@ -185,7 +187,7 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
 
     public void createBody() {
         body = world.createBody(bodyDef);
-        body.createFixture(fixtureDef);
+        fixture = body.createFixture(fixtureDef);
         body.setUserData(this);
         body.applyAngularImpulse(5, true);
     }
@@ -195,23 +197,39 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         velocity.y -= gravity * delta;
         damageTime += delta;
 
-        if (listener.onContactWithFireball() && damageTime >= 3f) {
+        if (velocity.y > speed) {
+            velocity.y = speed;
+        }
+        else if (velocity.y < -speed) {
+            velocity.y = -speed;
+        }
+
+        if ((listener.onContactWithFireball() || listener.onContactWithLava()) && damageTime >= 3f) {
             heartNumber--;
             damageTime = 0;
             hasTakenDamage = true;
+        }
+        if ( listener.onContactWithLava() && damageTime >= 3f) {
+            heartNumber = 0;
+            damageTime = 0;
+            hasTakenDamage = true;
+        }
+        if (listener.onContactWithLava()) {
+            speed = 30;
+        }
+        if (listener.onContactWithWater()) {
+            speed = 50;
+
+        }
+        if (!listener.onContactWithWater()) {
+            speed = 100;
+
         }
         if (heartNumber == 0) {
             deathTime += delta;
         }
         if (deathTime > 2.5f && !isDeath) {
             isDeath = true;
-        }
-
-        if (velocity.y > speed) {
-            velocity.y = speed;
-        }
-        else if (velocity.y < -speed) {
-            velocity.y = -speed;
         }
 
         if (velocity.x < 0) { // going left
@@ -222,7 +240,9 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         }
 
         canJump = listener.isPlayerOnGround();
-        body.applyForceToCenter(this.getVelocity(), true);
+        //body.applyForceToCenter(velocity, true);
+        body.setLinearVelocity(velocity);
+        //body.setLinearVelocity(velocity);
         if (hasTakenDamage && damageTime >= 0.9f) {
             hasTakenDamage = false;
         }
@@ -294,6 +314,20 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         playerPosition = body.getPosition();
     }
 
+    public void setPlayerCurrentMap(int map) {
+        currentMap = map;
+    }
+
+    public void setPoint(int addedPoint) {
+        point += addedPoint;
+    }
+
+    public void loadHeartAndPoint(int point, int heartNumber, int map) {
+        this.point = point;
+        this.heartNumber = heartNumber;
+        this.currentMap = map;
+    }
+
     //getter methods
     public BodyDef getBodyDef() {
         return bodyDef;
@@ -323,57 +357,43 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
 
     @Override
     public boolean keyDown(int keycode) {
-            switch (keycode) {
-                case Keys.W:
-                    if (canJump) {
-                        velocity.y = speed;
-                    }
-                    break;
-                case Keys.A:
-                    velocity.x = -speed;
-                    break;
-                case Keys.S:
-                    velocity.y = -speed;
-                    isDuck = true;
-                    countTime = 0;
-                    break;
-                case Keys.D:
-                    velocity.x = speed;
-                    break;
-                case Keys.SHIFT_LEFT:
-                    if (speedingKey == Keys.SHIFT_LEFT)
-                        speed = 180;
-                    break;
-                case Keys.K:
-                    if (speedingKey == Keys.K)
-                        speed = 180;
-                    break;
-                case Keys.F:
-                    onAttack = true;
-                    countTime = 0;
-                    break;
+            if (keycode == up) {
+                if (canJump) {
+                    velocity.y = speed / 1.8f;
+                }
+            }
+            if (keycode == left) {
+                velocity.x = -speed;
+            }
+            if (keycode == down) {
+                isDuck = true;
+                countTime = 0;
+            }
+            if (keycode == right) {
+                velocity.x = speed;
+            }
+            if (keycode == Keys.F) {
+                onAttack = true;
+                countTime = 0;
+            }
+            if (keycode == speedingKey) {
+                if (speedingKey == Keys.K)
+                speed = 120;
             }
             return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        switch (keycode) {
-            case Keys.W:
-                velocity.y = 0;
-                break;
-            case Keys.A:
+            if (keycode == left) {
                 velocity.x = 0;
-                break;
-            case Keys.S:
-                velocity.y = 0;
-                break;
-            case Keys.D:
+            }
+            if (keycode == right) {
                 velocity.x = 0;
-            case Keys.SHIFT_LEFT:
-                speed = 150;
-                break;
-        }
+            }
+            if (keycode == speedingKey) {
+                speed = 100;
+            }
         return true;
     }
 
@@ -416,7 +436,15 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         return heartNumber;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
     public boolean isDeath() {
         return isDeath;
+    }
+
+    public int getCurrentMap() {
+        return currentMap;
     }
 }

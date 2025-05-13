@@ -28,7 +28,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class DieScreen implements Screen{
+public class DeathScreen implements Screen{
     private SpriteBatch batch;
     private Sprite splash;
     private Stage stage;
@@ -109,7 +109,14 @@ public class DieScreen implements Screen{
                 stage.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap1()); 
+                    int lastGame = SaveLoadStage.getLastGameData();
+                    int currentMap = GameData.getCurrentMap(lastGame);
+                    if (currentMap == 1)
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap1());
+                    else if (currentMap == 2)
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap2());
+                    else if (currentMap == 3) 
+                        ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3());
                     }
                 })));
             }

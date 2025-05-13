@@ -1,13 +1,14 @@
 package com.mygdx.game;
 
-import java.util.Iterator;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,40 +21,33 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.badlogic.gdx.maps.tiled.tiles.StaticTiledMapTile;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
-import net.dermetfan.gdx.physics.box2d.*;
+import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
-public class MainGameMap1 implements Screen {
+public class MainGameMap2 implements Screen {
     // game variables
     private static final float TIMESTEP = 1 / 60f;
     private static final int VELOCITYITERATIONS = 8, POSITIONITERATIONS = 3;
@@ -68,7 +62,7 @@ public class MainGameMap1 implements Screen {
 
     private Box2DPlayer player;
     private boolean playerDied = false, canPassNextGame = false;
-    private MicrowaveRobot robot;
+    private ArrayList<MicrowaveRobot> robots;
     private Npc npc1;
     private MyContactListener cl;
     private Texture all;
@@ -115,7 +109,7 @@ public class MainGameMap1 implements Screen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth() / 12.5f, Gdx.graphics.getHeight() / 12.5f);
 
 
-        TiledMap map = new TmxMapLoader().load("assets/maps/box2d_map.tmx");
+        TiledMap map = new TmxMapLoader().load("assets/maps/mainMap2.tmx");
 
         parser = new Box2DMapObjectParser(UNIT_SCALE);
         parser.load(world, map);
@@ -123,7 +117,7 @@ public class MainGameMap1 implements Screen {
         mapRenderer = new OrthogonalTiledMapRenderer(map, parser.getUnitScale());
 
         game = SaveLoadStage.getLastGameData();
-        gameData = GameData.loadPlayerPosition(game, 1);
+        gameData = GameData.loadPlayerPosition(game, 2);
         playerPosition = new Vector2(gameData.x, gameData.y);
 
         all = new Texture("assets/AnimationSheet_Character.png");
@@ -132,17 +126,28 @@ public class MainGameMap1 implements Screen {
         TextureRegion[][] tmpReversed = TextureRegion.split(reversedAll, reversedAll.getWidth() / FRAME_COLS, reversedAll.getHeight() / FRAME_ROWS);
         player = new Box2DPlayer(world, playerPosition, tmp, tmpReversed);
         player.loadHeartAndPoint(gameData.point, gameData.heart, gameData.currentMap);
-        player.setPlayerCurrentMap(1);
+        player.setPlayerCurrentMap(2);
         Texture still = new Texture("assets/Microwave/still.png");
-        robot = new MicrowaveRobot(world, still, 80, 70);
+        MicrowaveRobot robot = new MicrowaveRobot(world, still, 230, 505);
+        robots = new ArrayList<MicrowaveRobot>();
+        robots.add(robot);
+        MicrowaveRobot robot2 = new MicrowaveRobot(world, still, 700, 485);
+        robots.add(robot2);
+        MicrowaveRobot robot3 = new MicrowaveRobot(world, still, 1030, 255);
+        robots.add(robot3);
+        MicrowaveRobot robot4 = new MicrowaveRobot(world, still, 835, 105);
+        robots.add(robot4);
+        MicrowaveRobot robot5 = new MicrowaveRobot(world, still, 770, 250);
+        robots.add(robot5);
+
         Texture npcTex = new Texture("assets/npc1.png");
         TextureRegion[][] npcTmp = TextureRegion.split(npcTex, npcTex.getWidth() / 24, npcTex.getHeight() / 1);
-        npc1 = new Npc(world, npcTmp, 580, 126);
+        npc1 = new Npc(world, npcTmp, 1470, 117);
 
         MapLayer objectLayer = map.getLayers().get("box2d"); // Replace with your layer name
         for (MapObject object : objectLayer.getObjects()) {
             if (object instanceof RectangleMapObject) {
-            Body body = (Body) object.getProperties().get("waterBody");
+            Body body = (Body) object.getProperties().get("lavaBody");
         
                 if (object.getProperties().containsKey("isSensor")) {
                     boolean isSensor = Boolean.parseBoolean(object.getProperties().get("isSensor").toString());
@@ -150,6 +155,7 @@ public class MainGameMap1 implements Screen {
                 // Set all fixtures in that body to be sensors
                     for (Fixture fixture : body.getFixtureList()) {
                         fixture.setSensor(isSensor);
+                        fixture.setUserData("lava");
                     }
                 }
             }
@@ -286,10 +292,12 @@ public class MainGameMap1 implements Screen {
                         break;
                     case Keys.K:
                         if (canPassNextGame) {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap2());
+                            GameData.savePlayerPosition(50, 70, player.getPoint(),  player.getHeart(), player.getCurrentMap(), game);
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3());
                         }
                     case Keys.P:
                         player.setPlayerPosition();
+                        System.out.println(playerPosition);
                         GameData.savePlayerPosition(player.getPlayerPosition().x, player.getPlayerPosition().y, player.getPoint(),  player.getHeart(), player.getCurrentMap(), game);
                         System.out.println(player.getPlayerPosition());
                 }
@@ -339,15 +347,17 @@ public class MainGameMap1 implements Screen {
                 });
             }
             float x = 0;
-            if (robot.isRight()) {
-                x = +0.5f;
+            for (MicrowaveRobot robot: robots) {
+                if (robot.isRight()) {
+                    x = +0.5f;
+                }
+                else {
+                    x = -0.5f;
+                }
+                robot.setPosition(robot.getBody().getPosition().x - robot.getWidth() / 2 + x, robot.getBody().getPosition().y - robot.getHeight() / 3);
+                robot.setRotation(robot.getBody().getAngle() * MathUtils.radiansToDegrees);
+                robot.update(delta, cl, player);
             }
-            else {
-                x = -0.5f;
-            }
-            robot.setPosition(robot.getBody().getPosition().x - robot.getWidth() / 2 + x, robot.getBody().getPosition().y - robot.getHeight() / 3);
-            robot.setRotation(robot.getBody().getAngle() * MathUtils.radiansToDegrees);
-            robot.update(delta, cl, player);
             npc1.setPosition(npc1.getBody().getPosition().x - npc1.getWidth() / 2 + x, npc1.getBody().getPosition().y - npc1.getHeight() / 2);
             npc1.setRotation(npc1.getBody().getAngle() * MathUtils.radiansToDegrees);
             npc1.update(delta, cl, player);
@@ -382,14 +392,16 @@ public class MainGameMap1 implements Screen {
                 dialogStage.draw();
             }
             player.draw(spriteBatch);
-            if (!robot.getDeathCondition()) {
-                robot.draw(spriteBatch);
-            }
             npc1.draw(spriteBatch);
-            for (Fireball fireball: robot.getFireballs()) {
-                if (!fireball.hasExploded()) {
-                    fireball.setPosition(fireball.getBody().getPosition().x - fireball.getWidth() / 2, fireball.getBody().getPosition().y - fireball.getHeight() / 2);
-                    fireball.draw(spriteBatch);
+            for (MicrowaveRobot robot: robots) {
+                 if (!robot.getDeathCondition()) {
+                    robot.draw(spriteBatch);
+                }
+                for (Fireball fireball: robot.getFireballs()) {
+                    if (!fireball.hasExploded()) {
+                        fireball.setPosition(fireball.getBody().getPosition().x - fireball.getWidth() / 2, fireball.getBody().getPosition().y - fireball.getHeight() / 2);
+                        fireball.draw(spriteBatch);
+                    }
                 }
             }
             spriteBatch.end();
@@ -438,6 +450,7 @@ public class MainGameMap1 implements Screen {
         }
         else if (screenState == SAVE_STATE) {
             player.setPlayerPosition();
+            System.out.println(playerPosition);
             saveStage.setInputHandler(player.getPlayerPosition().x, player.getPlayerPosition().y, player.getPoint(), player.getHeart(), player.getCurrentMap());
             addedStage = saveStage;
         }
@@ -459,8 +472,7 @@ public class MainGameMap1 implements Screen {
                         break;
                     case Keys.K:
                         if (canPassNextGame) {
-                            GameData.savePlayerPosition(50, 70, player.getPoint(),  player.getHeart(), player.getCurrentMap(), game);
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap2());
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3());
                         }
                 }
                 return false;
@@ -525,5 +537,4 @@ public class MainGameMap1 implements Screen {
         debugRenderer.dispose();
         player.getTexture().dispose();
     }
-    
 }
