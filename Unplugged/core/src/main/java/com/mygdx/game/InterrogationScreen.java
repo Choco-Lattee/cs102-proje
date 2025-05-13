@@ -61,7 +61,7 @@ public class InterrogationScreen implements Screen {
         this.evidences = evidences;
         this.foundEvidences = foundEvidences;
         Gdx.input.setInputProcessor(new CrimeSceneInputProcessor(this));
-        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
+        fontWhite = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         fontWhite.getData().setScale(2,2);
 
@@ -132,12 +132,12 @@ public class InterrogationScreen implements Screen {
                         showPoints = true;
                         if(!isThisPlayedBefore)
                         {
-                            
+                            isThisPlayedBefore =true;
                             ((Game) Gdx.app.getApplicationListener()).setScreen(new CrimeSceneScreen(game));
                         }
                         else
                         {
-                            game.setScreen(new DetectiveEndScreen(game,evidences,foundEvidences));
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new DetectiveEndScreen(game,evidences,foundEvidences));
                         }
                             
                     

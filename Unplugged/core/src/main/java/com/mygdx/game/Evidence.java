@@ -18,7 +18,7 @@ public class Evidence {
 
     public boolean isNear(int x, int y) 
     {
-        return position.dst(new Vector2(x, y)) < 1550;
+        return position.dst(new Vector2(x, y)) < 11100;
     }
 
     public boolean isFound()

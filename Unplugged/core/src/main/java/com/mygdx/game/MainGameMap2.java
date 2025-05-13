@@ -109,7 +109,7 @@ public class MainGameMap2 implements Screen {
         camera = new OrthographicCamera(Gdx.graphics.getWidth() / 12.5f, Gdx.graphics.getHeight() / 12.5f);
 
 
-        TiledMap map = new TmxMapLoader().load("assets/maps/mainMap2.tmx");
+        TiledMap map = new TmxMapLoader().load("Unplugged/assets/maps/mainMap2.tmx");
 
         parser = new Box2DMapObjectParser(UNIT_SCALE);
         parser.load(world, map);
@@ -120,14 +120,14 @@ public class MainGameMap2 implements Screen {
         gameData = GameData.loadPlayerPosition(game, 2);
         playerPosition = new Vector2(gameData.x, gameData.y);
 
-        all = new Texture("assets/AnimationSheet_Character.png");
-        reversedAll = new Texture("assets/AnimationSheet_Character_Reversed.png");
+        all = new Texture("Unplugged/assets/AnimationSheet_Character.png");
+        reversedAll = new Texture("Unplugged/assets/AnimationSheet_Character_Reversed.png");
         TextureRegion[][] tmp = TextureRegion.split(all, all.getWidth() / FRAME_COLS, all.getHeight() / FRAME_ROWS);
         TextureRegion[][] tmpReversed = TextureRegion.split(reversedAll, reversedAll.getWidth() / FRAME_COLS, reversedAll.getHeight() / FRAME_ROWS);
         player = new Box2DPlayer(world, playerPosition, tmp, tmpReversed);
         player.loadHeartAndPoint(gameData.point, gameData.heart, gameData.currentMap);
         player.setPlayerCurrentMap(2);
-        Texture still = new Texture("assets/Microwave/still.png");
+        Texture still = new Texture("Unplugged/assets/Microwave/still.png");
         MicrowaveRobot robot = new MicrowaveRobot(world, still, 230, 505);
         robots = new ArrayList<MicrowaveRobot>();
         robots.add(robot);
@@ -140,7 +140,7 @@ public class MainGameMap2 implements Screen {
         MicrowaveRobot robot5 = new MicrowaveRobot(world, still, 770, 250);
         robots.add(robot5);
 
-        Texture npcTex = new Texture("assets/npc1.png");
+        Texture npcTex = new Texture("Unplugged/assets/npc1.png");
         TextureRegion[][] npcTmp = TextureRegion.split(npcTex, npcTex.getWidth() / 24, npcTex.getHeight() / 1);
         npc1 = new Npc(world, npcTmp, 1470, 117);
 
@@ -170,17 +170,17 @@ public class MainGameMap2 implements Screen {
         Viewport gameViewport = new FitViewport(GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT, camera);
         gameStage = new Stage(gameViewport);
         dialogStage = new Stage(dialogViewport);
-        atlas = new TextureAtlas("assets/menuTools.atlas");
+        atlas = new TextureAtlas("Unplugged/assets/menuTools.atlas");
         skin = new Skin(atlas);
-        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
-        BitmapFont miniFont = new BitmapFont(Gdx.files.internal("assets/font/miniFont.fnt"));
+        white = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"), false);
+        BitmapFont miniFont = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/miniFont.fnt"));
         miniFont.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         miniFont.getData().setScale(0.25f,0.25f);
         threeHeartImage = new Image(skin.getDrawable("threeHeart"));
         twoHeartImage = new Image(skin.getDrawable("twoHeart"));
         oneHeartImage = new Image(skin.getDrawable("oneHeart"));
-        TextureAtlas fieldAtlas = new TextureAtlas("assets/settings_tools.atlas");
+        TextureAtlas fieldAtlas = new TextureAtlas("Unplugged/assets/settings_tools.atlas");
         Skin fieldSkin = new Skin(fieldAtlas);
         TextFieldStyle panelStyle = new TextFieldStyle();
         panelStyle.background = fieldSkin.getDrawable("panel");
@@ -219,7 +219,7 @@ public class MainGameMap2 implements Screen {
         settingStage = new SettingStage(viewportSetting, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         saveStage = new SaveLoadStage(viewportSave, GAME_WORLD_WIDTH, GAME_WORLD_HEIGHT, true);
 
-        Texture splashTexture = new Texture("assets/Background.png");
+        Texture splashTexture = new Texture("Unplugged/assets/Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 

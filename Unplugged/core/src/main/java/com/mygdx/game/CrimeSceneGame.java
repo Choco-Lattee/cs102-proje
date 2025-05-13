@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class CrimeSceneGame extends Game {
-    public SpriteBatch batch;
-    public BitmapFont font;
+    public SpriteBatch batch = new SpriteBatch();;
+    public BitmapFont font = new BitmapFont();
 
     @Override
     public void create() {

@@ -32,7 +32,7 @@ public class PauseStage extends Stage {
 
     public PauseStage(Viewport viewport, float width, float height) {
         super(viewport);
-        atlas = new TextureAtlas("assets/menuTools.atlas");
+        atlas = new TextureAtlas("Unplugged/assets/menuTools.atlas");
         skin = new Skin(atlas);
         this.width = width;
         this.height = height;
@@ -47,8 +47,8 @@ public class PauseStage extends Stage {
         //imageToStageWitdth = menuImage.getWidth() / GAME_WORLD_WIDTH;
         //imageToStageHeight = menuImage.getHeight() / GAME_WORLD_HEIGHT;
 
-        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"), false);
 
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button.normal");

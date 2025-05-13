@@ -22,10 +22,10 @@ public class DetectiveEndScreen implements Screen {
     public boolean showPoints = true;
     public DetectiveEndScreen(final CrimeSceneGame game, ArrayList<Evidence> evidences, ArrayList<Evidence> foundEvidences) {
         this.game = game;
-        background = new Texture("EndGameScreenBackground");
-        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
+        background = new Texture("Unplugged/assets/EndGameScreenBackground.png");
+        fontWhite = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
-        fontWhite.getData().setScale(1,1);
+        fontWhite.getData().setScale(3,3);
 
     }
 
@@ -43,8 +43,16 @@ public class DetectiveEndScreen implements Screen {
             fontWhite.draw(game.batch, "Found evidence X" + CrimeSceneScreen.foundEvidenceCount + ": " + CrimeSceneScreen.foundEvidenceCount * 100, 650, 600);
             fontWhite.draw(game.batch, "Guess points: " + InterrogationScreen.addFinalPoint, 650, 500);
             fontWhite.draw(game.batch, "Total points: " + CrimeSceneScreen.point, 650, 400);
-            fontWhite.draw(game.batch, "Press Anywhere to continue", 650, 300);
+            fontWhite.draw(game.batch, "Press Anywhere to continue", 650, 200);
 
+            if ( CrimeSceneScreen.point < 1200)
+            {
+                fontWhite.draw(game.batch, "You Lose! (max possible points:3000)", 650, 300);
+            }
+            else
+            {
+                fontWhite.draw(game.batch, "You Win! (max possible points:3000)", 650, 300);
+            }
             if (Gdx.input.justTouched()) 
             {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new GameEndScreen()); 

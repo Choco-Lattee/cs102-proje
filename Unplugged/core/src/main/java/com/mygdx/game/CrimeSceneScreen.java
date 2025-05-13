@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -62,7 +63,7 @@ public class CrimeSceneScreen implements Screen {
         
 
 
-        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
+        fontWhite = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         fontWhite.getData().setScale(3,3);
         rect.setSize(100, 100);
@@ -100,13 +101,13 @@ public class CrimeSceneScreen implements Screen {
         Gdx.gl.glClearColor(Color.BROWN.r,Color.BROWN.g,Color.BROWN.b,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if((totalTime - (TimeUtils.timeSinceMillis(startTime) / 1000)) <= 0 || evidences.size() < 1) 
+        if((totalTime - (TimeUtils.timeSinceMillis(startTime) / 1000)) <= 0 || evidences.size() < 1 || foundEvidences.size() >= 6) 
         {
             isThisPlayedBefore = true;
             point += foundEvidences.size() * 100;
             foundEvidenceCount += foundEvidences.size();
             // go to integorration
-            game.setScreen(new InterrogationScreen(game,evidences,foundEvidences));
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new InterrogationScreen(game, evidences, foundEvidences)); 
             Gdx.input.setInputProcessor(null);
 
         }
