@@ -42,7 +42,16 @@ public class EndGameScreen implements Screen {
             fontWhite.draw(game.batch, "Found evidence X" + CrimeSceneScreen.foundEvidenceCount + ": " + CrimeSceneScreen.foundEvidenceCount * 100, 650, 600);
             fontWhite.draw(game.batch, "Guess points: " + InterrogationScreen.addFinalPoint, 650, 500);
             fontWhite.draw(game.batch, "Total points: " + CrimeSceneScreen.point, 650, 400);
-            fontWhite.draw(game.batch, "Press Anywhere to continue", 650, 300);
+            fontWhite.draw(game.batch, "Press Anywhere to continue", 650, 200);
+
+            if ( CrimeSceneScreen.point < 1200)
+            {
+                fontWhite.draw(game.batch, "You Lose! (max possible points:3000)", 650, 300);
+            }
+            else
+            {
+                fontWhite.draw(game.batch, "You Win! (max possible points:3000)", 650, 300);
+            }
 
             if (Gdx.input.justTouched()) 
             {
