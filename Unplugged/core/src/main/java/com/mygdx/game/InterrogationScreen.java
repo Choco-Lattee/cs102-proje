@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Game;
@@ -139,7 +139,7 @@ public class InterrogationScreen implements Screen {
                         }
                         else
                         {
-                            game.setScreen(new EndGameScreen(game,evidences,foundEvidences));
+                            game.setScreen(new DetectiveEndScreen(game,evidences,foundEvidences));
                             //TODO Talha main oyuna geçiş burdan olcak
                             // CrimeSceneScreen.point toplam puan onu çekmeyi unutma (static variable)
                         }
