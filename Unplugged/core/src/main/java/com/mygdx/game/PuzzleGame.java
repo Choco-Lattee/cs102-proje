@@ -101,12 +101,7 @@ public class PuzzleGame extends Game {
             @Override
             public void clicked(InputEvent e, float x, float y) {
                 Dialog dialog = new Dialog("Mirror Types Guide", skin);
-                dialog.text("""
-                            FLAT (Blue): Basic reflection
-                            CONVEX (Pink): Diverges rays
-                            CONCAVE (Orange): Converges rays
-                            Click mirrors to rotate
-                            Goal: Direct light through door gap""");
+                dialog.text("FLAT (Blue): Basic reflection\nCONVEX (Pink): Diverges rays\nCONCAVE (Orange): Converges rays\nClick mirrors to rotate\nGoal: Direct light through door gap");
                 dialog.button("OK").show(stage);
             }
         });

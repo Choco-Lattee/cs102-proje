@@ -76,20 +76,27 @@ public class Mirror {
 
     public Vector2 reflect(Vector2 inDir, Vector2 normal, Vector2 hitPoint) {
         Vector2 reflected = inDir.cpy().sub(normal.cpy().scl(2 * inDir.dot(normal))).nor();
-
-        return switch (type) {
-            case "CONVEX" -> reflected.rotateDeg(20f).nor();
-            case "CONCAVE" -> reflected.lerp(position.cpy().sub(hitPoint).nor(), 0.5f).nor();
-            default -> reflected;
-        };
+         switch (type) {
+            case "CONVEX":
+             return reflected.rotateDeg(20f).nor();
+            case "CONCAVE":
+              return reflected.lerp(position.cpy().sub(hitPoint).nor(), 0.5f).nor();
+            default:
+             return reflected;
+        }
     }
 
     public void draw(ShapeRenderer renderer) {
-        renderer.setColor(switch (type) {
-            case "CONVEX" -> Color.PINK;
-            case "CONCAVE" -> Color.ORANGE;
-            default -> Color.SKY;
-        });
+        Color color;
+        switch (type) {
+            case "CONVEX":
+              color = Color.PINK;
+            case "CONCAVE":
+             color = Color.ORANGE;
+            default:
+             color = Color.SKY;
+        }
+        renderer.setColor(color);
 
         float[] verts = bounds.getTransformedVertices();
         renderer.triangle(verts[0], verts[1], verts[2], verts[3], verts[4], verts[5]);

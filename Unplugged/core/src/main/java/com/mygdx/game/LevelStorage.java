@@ -64,22 +64,31 @@ public class LevelStorage {
     }
 
     public static Level getLevel(String type, int index) {
-        Level original = switch (type.toUpperCase()) {
-            case "FLAT" -> getSafe(flatLevels, index);
-            case "CONVEX" -> getSafe(convexLevels, index);
-            case "CONCAVE" -> getSafe(concaveLevels, index);
-            default -> null;
-        };
+        Level original;
+        switch (type.toUpperCase()) {
+            case"FLAT":
+             original = getSafe(flatLevels, index);
+            case "CONVEX":
+             original = getSafe(convexLevels, index);
+            case "CONCAVE":
+            getSafe(concaveLevels, index);
+            default:
+            original = null;
+        }
         return original != null ? original.copy() : null;
     }
 
     public static int getLevelCount(String type) {
-        return switch (type.toUpperCase()) {
-            case "FLAT" -> flatLevels.size();
-            case "CONVEX" -> convexLevels.size();
-            case "CONCAVE" -> concaveLevels.size();
-            default -> 0;
-        };
+        switch (type.toUpperCase()) {
+            case "FLAT":
+            return flatLevels.size();
+            case "CONVEX":
+            return convexLevels.size();
+            case "CONCAVE":
+            return concaveLevels.size();
+            default:
+             return 0;
+        }
     }
 
     private static Level getSafe(List<Level> list, int index) {
