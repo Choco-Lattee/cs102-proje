@@ -59,7 +59,6 @@ public class LevelStorage {
             level.setMirrors(mirrors);
             levels.add(level);
         }
-
         return levels;
     }
 

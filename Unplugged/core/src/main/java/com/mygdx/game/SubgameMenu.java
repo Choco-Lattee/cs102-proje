@@ -110,7 +110,7 @@ public class SubgameMenu implements Screen {
                             ((Game) Gdx.app.getApplicationListener()).setScreen(new Play());                            
                         }
                         if (list.getSelected().equals("Light Puzzle Game")) {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new PuzzleMenuScreen(new PuzzleGame()));                           
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new PuzzleGame());                           
                         }
                         if (list.getSelected().equals("Decetive Puzzle Game")) {
                             ((Game) Gdx.app.getApplicationListener()).setScreen(new CrimeSceneScreen(new CrimeSceneGame()));                            

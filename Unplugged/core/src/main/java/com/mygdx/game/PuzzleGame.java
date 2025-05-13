@@ -1,87 +1,126 @@
 package com.mygdx.game;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class PuzzleGame extends Game {
-    public SpriteBatch batch;
-    public BitmapFont font;
-    public Level currentLevel;
-    public int currentLevelIndex = 0;
-    public String currentLevelType = "FLAT";
+public class PuzzleGame implements Screen {
 
-    public Stage stage;
+    private enum State { MENU, GAME }
+    private State state = State.MENU;
+
+    private Stage stage;
     private Skin skin;
-    public ShapeRenderer shapeRenderer;
-    public OrthographicCamera camera;
+    private SpriteBatch batch;
+    private BitmapFont font;
+    private OrthographicCamera camera;
+    private ShapeRenderer shapeRenderer;
+
+    private Level currentLevel;
+    private String currentLevelType = "FLAT";
+    private int currentLevelIndex = 0;
 
     public int moveCount = 0;
 
-    public Color[] rainbowColors = new Color[] {
-        Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
-        Color.CYAN, Color.BLUE, Color.MAGENTA
-    };
-
-    public float colorTimer = 0f;
-    public float colorChangeInterval = 0.15f;
-    public int currentRainbowIndex = 0;
-    public Color currentBackgroundColor = Color.LIGHT_GRAY;
-
     private Preferences prefs;
-    private final Random random = new Random();
+
+    private final Color[] rainbowColors = new Color[] {
+            Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
+            Color.CYAN, Color.BLUE, Color.MAGENTA
+    };
+    private float colorTimer = 0f;
+    private float colorChangeInterval = 0.15f;
+    private int currentRainbowIndex = 0;
+    private Color currentBackgroundColor = Color.LIGHT_GRAY;
 
     @Override
-    public void create() {
+    public void show() {
+        LevelStorage.loadAllLevels();
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        stage = new Stage(new ScreenViewport());
+        skin = new Skin(Gdx.files.internal("assets/PuzzleAssets/skin/plain-james-ui.json"));
 
         batch = new SpriteBatch();
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
-        LevelStorage.loadAllLevels();
-        setScreen(new PuzzleMenuScreen(this));
+
+        prefs = Gdx.app.getPreferences("LightPuzzleProgress");
+
+        setupMenu();
     }
 
-    public void loadLevel(Level level) {
-        if (prefs == null) prefs = Gdx.app.getPreferences("LightPuzzleProgress");
-        if (level == null) {
-            System.err.println("Level is null!");
-            return;
-        }
+    private void setupMenu() {
+        state = State.MENU;
+        stage.clear();
 
-        this.currentLevel = level;
-        this.moveCount = 0;
-        this.colorTimer = 0f;
-        this.currentRainbowIndex = 0;
-        this.currentBackgroundColor = Color.LIGHT_GRAY;
+        Table table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
 
-        // Set up UI stage
-        stage = new Stage(new ScreenViewport());
-        skin = new Skin(Gdx.files.internal("assets/PuzzleAssets/skin/plain-james-ui.json"));
-        setupUI();
+        TextButton flat = new TextButton("Flat Levels", skin);
+        TextButton convex = new TextButton("Convex Levels", skin);
+        TextButton concave = new TextButton("Concave Levels", skin);
+        TextButton cont = new TextButton("Continue", skin);
+        TextButton exit = new TextButton("Exit", skin);
 
-        // InputProcessor will be set in LevelScreen (do not set it here)
-        setScreen(new LevelScreen(this));
-        saveProgress();
+        flat.addListener(createLoadListener("FLAT", 0));
+        convex.addListener(createLoadListener("CONVEX", 0));
+        concave.addListener(createLoadListener("CONCAVE", 0));
+        cont.addListener(new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                loadSavedProgress(); return true;
+            }
+        });
+        exit.addListener(new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                ((Game) Gdx.app.getApplicationListener()).setScreen(new MainGameMap3()); return true;
+            }
+        });
+
+        table.add(flat).pad(6).width(180).height(40).row();
+        table.add(convex).pad(6).width(180).height(40).row();
+        table.add(concave).pad(6).width(180).height(40).row();
+        table.add(cont).pad(6).width(180).height(40).row();
+        table.add(exit).pad(6).width(180).height(40).row();
+
+        Gdx.input.setInputProcessor(stage);
     }
 
-    private void setupUI() {
+    private InputListener createLoadListener(String type, int index) {
+        return new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                currentLevelType = type;
+                currentLevelIndex = index;
+                loadLevel(LevelStorage.getLevel(type, index));
+                return true;
+            }
+        };
+    }
+
+    private void setupGameUI() {
+        state = State.GAME;
+        stage.clear();
+
         Table table = new Table();
         table.top().left().pad(10);
         table.setFillParent(true);
@@ -89,134 +128,116 @@ public class PuzzleGame extends Game {
 
         TextButton info = new TextButton("Info", skin);
         TextButton reset = new TextButton("Reset", skin);
-        TextButton skip = new TextButton("Skip", skin);
-        TextButton save = new TextButton("Save", skin);
         TextButton menu = new TextButton("Menu", skin);
 
-        // Each button has its own ClickListener
-        info.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent e, float x, float y) {
-                Dialog dialog = new Dialog("Mirror Types Guide", skin);
-                dialog.text("FLAT (Blue): Basic reflection\nCONVEX (Pink): Diverges rays\nCONCAVE (Orange): Converges rays\nClick mirrors to rotate\nGoal: Direct light through door gap");
-                dialog.button("OK").show(stage);
+        info.addListener(new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                new Dialog("Info", skin)
+                        .text("FLAT: Blue - Normal\nCONVEX: Pink - Diverging\nCONCAVE: Orange - Converging\nClick mirrors to rotate")
+                        .button("OK").show(stage);
+                return true;
             }
         });
 
-        reset.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent e, float x, float y) {
-                if (currentLevel != null) {
-                    currentLevel.reset();
-                    moveCount = 0;
-                    colorTimer = 0f;
-                    currentRainbowIndex = 0;
-                    currentBackgroundColor = Color.LIGHT_GRAY;
-                }
+        reset.addListener(new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                currentLevel.reset(); moveCount = 0;
+                colorTimer = 0f; currentRainbowIndex = 0;
+                currentBackgroundColor = Color.LIGHT_GRAY;
+                return true;
             }
         });
 
-        skip.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent e, float x, float y) {
-                skipRandomLevel();
+        menu.addListener(new InputListener() {
+            @Override public boolean touchDown(InputEvent e, float x, float y, int p, int b) {
+                setupMenu(); return true;
             }
         });
 
-        save.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent e, float x, float y) {
-                saveProgress();
-                Dialog dialog = new Dialog("Saved", skin);
-                dialog.text("Progress saved.").button("OK").show(stage);
-            }
-        });
-
-        menu.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent e, float x, float y) {
-                returnToMenu();
-            }
-        });
-
-        table.add(info);
-        table.add(reset);
-        table.add(skip);
-        table.add(save);
-        table.add(menu);
+        table.add(info); table.add(reset); table.add(menu);
         stage.addActor(table);
+
+        // Mirror click input
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                Vector3 touch = new Vector3(screenX, screenY, 0);
+                camera.unproject(touch); // ✅ şimdi uyumlu
+
+                if (currentLevel != null) {
+                    currentLevel.handleClick(touch.x, touch.y);
+                    moveCount++;
+                }
+                return false;
+            }
+
+        });
     }
 
-    private void skipRandomLevel() {
-        if (currentLevelType == null) {
-            System.err.println("currentLevelType is null. Defaulting to FLAT.");
-            currentLevelType = "FLAT";
-        }
-
-        int total = LevelStorage.getLevelCount(currentLevelType);
-        if (total <= 1) {
-            System.err.println("Not enough levels to skip in type: " + currentLevelType);
+    private void loadLevel(Level level) {
+        if (level == null) {
+            System.err.println("Null level.");
             return;
         }
+        currentLevel = level;
+        moveCount = 0;
+        colorTimer = 0f;
+        currentRainbowIndex = 0;
+        currentBackgroundColor = Color.LIGHT_GRAY;
 
-        int newIndex = currentLevelIndex;
-        int attempts = 0;
-        while (newIndex == currentLevelIndex && attempts < 10) {
-            newIndex = random.nextInt(total);
-            attempts++;
-        }
-
-        if (newIndex < 0 || newIndex >= total) {
-            System.err.println("Invalid index selected for type: " + currentLevelType);
-            return;
-        }
-
-        Level newLevel = LevelStorage.getLevel(currentLevelType, newIndex);
-        if (newLevel != null) {
-            currentLevelIndex = newIndex;
-            System.out.println("Skipping to " + currentLevelType + " level index: " + currentLevelIndex);
-            loadLevel(newLevel);
-        } else {
-            System.err.println("Failed to load level: " + currentLevelType + " index: " + newIndex);
-        }
+        setupGameUI();
+        saveProgress();
     }
 
-    public void returnToMenu() {
-        if (stage != null) {
-            stage.dispose();
-            stage = null;
-        }
-        setScreen(new PuzzleMenuScreen(this));
-    }
-
-    public void loadSavedProgress() {
-        if (prefs == null) prefs = Gdx.app.getPreferences("LightPuzzleProgress");
-
+    private void loadSavedProgress() {
         if (prefs.getBoolean("hasSavedProgress", false)) {
             String type = prefs.getString("lastType", "FLAT");
             int index = prefs.getInteger("lastIndex", 0);
             currentLevelType = type;
             currentLevelIndex = index;
             loadLevel(LevelStorage.getLevel(type, index));
-        } else {
-            currentLevelType = "FLAT";
-            currentLevelIndex = 0;
-            loadLevel(LevelStorage.getLevel("FLAT", 0));
         }
     }
 
     private void saveProgress() {
-        if (prefs != null && currentLevelType != null) {
-            prefs.putBoolean("hasSavedProgress", true);
-            prefs.putString("lastType", currentLevelType);
-            prefs.putInteger("lastIndex", currentLevelIndex);
-            prefs.flush();
+        prefs.putBoolean("hasSavedProgress", true);
+        prefs.putString("lastType", currentLevelType);
+        prefs.putInteger("lastIndex", currentLevelIndex);
+        prefs.flush();
+    }
+
+    private void updateBackground(float delta) {
+        if (currentLevel != null && currentLevel.isCompleted()) {
+            colorTimer += delta;
+            if (colorTimer >= colorChangeInterval) {
+                currentRainbowIndex = (currentRainbowIndex + 1) % rainbowColors.length;
+                currentBackgroundColor = rainbowColors[currentRainbowIndex];
+                colorTimer = 0f;
+            }
+        } else {
+            currentBackgroundColor = Color.LIGHT_GRAY;
         }
     }
 
     @Override
-    public void render() {
-        super.render();
+    public void render(float delta) {
+        updateBackground(delta);
+
+        Gdx.gl.glClearColor(currentBackgroundColor.r, currentBackgroundColor.g, currentBackgroundColor.b, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (state == State.GAME && currentLevel != null) {
+            shapeRenderer.setProjectionMatrix(camera.combined);
+            currentLevel.update(delta);
+            currentLevel.draw(shapeRenderer);
+        }
+
+        stage.act(delta);
+        stage.draw();
+
+        batch.begin();
+        font.draw(batch, "Moves: " + moveCount, 10, Gdx.graphics.getHeight() - 10);
+        batch.end();
     }
 
     @Override
@@ -224,20 +245,33 @@ public class PuzzleGame extends Game {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
+        stage.getViewport().update(width, height, true);
 
-        if (stage != null) {
-            stage.getViewport().update(width, height, true);
-        }
-
-        if (currentLevel != null) {
+        if (state == State.GAME && currentLevel != null) {
             currentLevel.reset();
         }
+
+        // ✔ input yeniden atanmalı
+        if (state == State.GAME) {
+            setupGameUI(); // yeniden UI kur
+        } else {
+            Gdx.input.setInputProcessor(stage); // menüdeyse sadece stage yeter
+        }
+    }
+
+    @Override public void pause() {}
+    @Override public void resume() {}
+
+    @Override
+    public void hide() {
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
-        if (stage != null) stage.dispose();
-        if (skin != null) skin.dispose();
-        if (shapeRenderer != null) shapeRenderer.dispose();
+        stage.dispose();
+        skin.dispose();
+        batch.dispose();
+        shapeRenderer.dispose();
     }
 }
