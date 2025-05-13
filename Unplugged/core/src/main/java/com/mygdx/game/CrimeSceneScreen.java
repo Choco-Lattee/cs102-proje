@@ -63,7 +63,7 @@ public class CrimeSceneScreen implements Screen {
         
 
 
-        fontWhite = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"));
+        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         fontWhite.getData().setScale(3,3);
         rect.setSize(100, 100);

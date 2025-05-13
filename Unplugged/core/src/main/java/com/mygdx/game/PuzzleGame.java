@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class PuzzleGame extends Game {
+public class PuzzleGame extends Game{
     public SpriteBatch batch;
     public BitmapFont font;
     public Level currentLevel;
@@ -55,7 +55,7 @@ public class PuzzleGame extends Game {
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         LevelStorage.loadAllLevels();
-        setScreen(new MainMenuScreen(this));
+        setScreen(new PuzzleMenuScreen(this));
     }
 
     public void loadLevel(Level level) {
@@ -68,8 +68,8 @@ public class PuzzleGame extends Game {
         this.currentLevel = level; 
 
         System.out.println("Loaded level with " +
-                        currentLevel.getMirrorCount() + " mirrors, " +
-                        currentLevel.getLightCount() + " lights");
+        currentLevel.getMirrorCount() + " mirrors, " +
+        currentLevel.getLightCount() + " lights");
 
         this.moveCount = 0;
         this.colorTimer = 0f;
@@ -77,10 +77,10 @@ public class PuzzleGame extends Game {
         this.currentBackgroundColor = Color.LIGHT_GRAY;
 
         stage = new Stage(new ScreenViewport());
-        skin = new Skin(Gdx.files.internal("skin/plain-james-ui.json"));
+        skin = new Skin(Gdx.files.internal("assets/PuzzleAssets/skin/plain-james-ui.json"));
         setupUI();
         Gdx.input.setInputProcessor(stage);
-        setScreen(new LevelScreen(this));
+        ((Game) Gdx.app.getApplicationListener()).setScreen(new LevelScreen(this));
         saveProgress();
     }
 
@@ -186,7 +186,7 @@ public class PuzzleGame extends Game {
             stage.dispose();
             stage = null;
         }
-        setScreen(new MainMenuScreen(this));
+        setScreen(new PuzzleMenuScreen(this));
     }
 
     public void loadSavedProgress() {

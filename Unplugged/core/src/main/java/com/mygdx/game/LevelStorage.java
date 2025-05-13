@@ -19,9 +19,9 @@ public class LevelStorage {
         convexLevels.clear();
         concaveLevels.clear();
 
-        flatLevels.addAll(loadSubset("flat_levels.json"));
-        convexLevels.addAll(loadSubset("convex_levels.json"));
-        concaveLevels.addAll(loadSubset("concave_levels.json"));
+        flatLevels.addAll(loadSubset("assets/PuzzleAssets/flat_levels.json"));
+        convexLevels.addAll(loadSubset("assets/PuzzleAssets/convex_levels.json"));
+        concaveLevels.addAll(loadSubset("assets/PuzzleAssets/concave_levels.json"));
     }
 
     private static List<Level> loadSubset(String fileName) {

@@ -8,17 +8,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MainMenuScreen implements Screen {
+public class PuzzleMenuScreen implements Screen {
     private final PuzzleGame game;
     private final Stage stage;
     private final Skin skin;
 
-    public MainMenuScreen(PuzzleGame game) {
+    public PuzzleMenuScreen(PuzzleGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
-        this.skin = new Skin(Gdx.files.internal("skin/plain-james-ui.json"));
+        this.skin = new Skin(Gdx.files.internal("assets/PuzzleAssets/skin/plain-james-ui.json"));
         setupMenu();
     }
 
@@ -51,13 +52,14 @@ public class MainMenuScreen implements Screen {
             return true;
         });
 
-        concaveButton.addListener(event -> {
-            if (event.toString().equals("touchDown")) {
+        concaveButton.addListener(new ClickListener() {
+            public void clicked(com.badlogic.gdx.scenes.scene2d.InputEvent event, float x, float y) {
+                if (event.toString().equals("touchDown")) {
                 game.currentLevelType = "CONCAVE";
                 game.currentLevelIndex = 0;
                 game.loadLevel(LevelStorage.getLevel("CONCAVE", 0));
             }
-            return true;
+            };
         });
 
         continueButton.addListener(event -> {
