@@ -7,6 +7,6 @@ public class Unplugged extends Game {
     @Override
     public void create() {
         //setScreen(new FirstScreen());
-        setScreen(new MainGame());
+        setScreen(new MainMenu());
     }
 }
