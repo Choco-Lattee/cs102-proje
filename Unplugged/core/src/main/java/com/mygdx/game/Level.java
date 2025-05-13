@@ -102,7 +102,7 @@ public class Level {
     }
 
     private void traceLight(Vector2 origin, Vector2 direction, int depth) {
-        if (depth > 20) return; // Sonsuz döngüyü önle
+        if (depth > 20) return;
 
         Vector2 start = origin.cpy();
         Vector2 end = start.cpy().add(direction.cpy().setLength(1500));
@@ -142,9 +142,44 @@ public class Level {
                 }
             }
         }
+
         return closestHit;
     }
-        
+
+    private Vector2 findIntersection(Vector2 start, Vector2 end, Polygon polygon) {
+        float[] vertices = polygon.getTransformedVertices();
+        for (int i = 0; i < vertices.length; i += 2) {
+            Vector2 p1 = new Vector2(vertices[i], vertices[i + 1]);
+            Vector2 p2 = new Vector2(vertices[(i + 2) % vertices.length], vertices[(i + 3) % vertices.length]);
+            Vector2 intersection = new Vector2();
+            if (Intersector.intersectSegments(start, end, p1, p2, intersection)) {
+                return intersection;
+            }
+        }
+        return null;
+    }
+
+    public void handleClick(float x, float y) {
+    Vector2 click = new Vector2(x, y);
+    for (Mirror m : mirrors) {
+        if (m.containsPoint(click)) {
+            m.rotateBy(45);
+            PuzzleGame game = (PuzzleGame) Gdx.app.getApplicationListener();
+            game.moveCount++;
+            break;
+        }
+    }
+}
+
+    public void draw(ShapeRenderer renderer) {
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        for (LightSource source : lightSources) source.draw(renderer);
+        for (Mirror mirror : mirrors) mirror.draw(renderer);
+        renderer.setColor(Color.YELLOW);
+        for (RaySegment ray : rays) renderer.rectLine(ray.getStart(), ray.getEnd(), 2);
+        if (door != null) door.draw(renderer);
+        renderer.end();
+    }
 
     public Level copy() {
         Level newLevel = new Level();
@@ -173,39 +208,5 @@ public class Level {
 
     public int getLightCount() {
         return lightSources.size();
-    }
-
-    private Vector2 findIntersection(Vector2 start, Vector2 end, Polygon polygon) {
-        float[] vertices = polygon.getTransformedVertices();
-        for (int i = 0; i < vertices.length; i += 2) {
-            Vector2 p1 = new Vector2(vertices[i], vertices[i + 1]);
-            Vector2 p2 = new Vector2(vertices[(i + 2) % vertices.length], vertices[(i + 3) % vertices.length]);
-            Vector2 intersection = new Vector2();
-            if (Intersector.intersectSegments(start, end, p1, p2, intersection)) {
-                return intersection;
-            }
-        }
-        return null;
-    }
-
-    public void handleClick(float x, float y) {
-        Vector2 click = new Vector2(x, y);
-        for (Mirror m : mirrors) {
-            if (m.getBounds().contains(click)) {
-                m.rotateBy(45); // 45 derece döndür
-                PuzzleGame game = (PuzzleGame) Gdx.app.getApplicationListener();
-                game.moveCount++;
-                break;
-            }
-        }
-    }
-    public void draw(ShapeRenderer renderer) {
-        renderer.begin(ShapeRenderer.ShapeType.Filled);
-        for (LightSource source : lightSources) source.draw(renderer);
-        for (Mirror mirror : mirrors) mirror.draw(renderer);
-        renderer.setColor(Color.YELLOW);
-        for (RaySegment ray : rays) renderer.rectLine(ray.getStart(), ray.getEnd(), 2);
-        if (door != null) door.draw(renderer);
-        renderer.end();
     }
 }

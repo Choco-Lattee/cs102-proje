@@ -2,701 +2,324 @@
   {
     "lightSourcePositions": [
       {
-        "x": 150.0,
-        "y": 100.0
+        "x": 290.0,
+        "y": 240.0
       }
     ],
     "targetDoorPos": {
-      "x": 600.0,
-      "y": 300.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 300.0,
-          "y": 150.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 450.0,
-          "y": 300.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 160.0,
-        "y": 104.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 594.0,
-      "y": 296.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 258.0,
-          "y": 142.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 418.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 165.0,
-        "y": 106.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 591.0,
-      "y": 294.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 262.0,
-          "y": 143.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 417.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 170.0,
-        "y": 108.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 588.0,
-      "y": 292.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 266.0,
-          "y": 144.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 416.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 175.0,
-        "y": 110.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 585.0,
+      "x": 860.0,
       "y": 290.0
     },
     "mirrors": [
       {
         "position": {
-          "x": 270.0,
-          "y": 145.0
+          "x": 480.0,
+          "y": 240.0
         },
         "type": "FLAT",
-        "rotation": 45.0
+        "rotation": 90.0
       },
       {
         "position": {
-          "x": 415.0,
-          "y": 280.0
+          "x": 570.0,
+          "y": 310.0
         },
         "type": "FLAT",
-        "rotation": -45.0
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 650.0,
+          "y": 380.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
       }
     ],
     "initialLightDirection": {
       "x": 1.0,
-      "y": 0.4
+      "y": 0.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 470.0,
+        "y": 310.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 860.0,
+      "y": 290.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 570.0,
+          "y": 310.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 650.0,
+          "y": 380.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 480.0,
+          "y": 240.0
+        },
+        "type": "FLAT",
+        "rotation": 90.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 0.0,
+      "y": -1.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 740.0,
+        "y": 250.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 880.0,
+      "y": 20.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 660.0,
+          "y": 310.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 570.0,
+          "y": 380.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 1.0,
+      "y": -1.0
     },
     "isDoorHorizontal": true
   },
   {
     "lightSourcePositions": [
       {
-        "x": 180.0,
-        "y": 112.0
+        "x": 470.0,
+        "y": 310.0
       }
     ],
     "targetDoorPos": {
-      "x": 582.0,
-      "y": 288.0
+      "x": 860.0,
+      "y": 290.0
     },
     "mirrors": [
       {
         "position": {
-          "x": 274.0,
-          "y": 146.0
+          "x": 570.0,
+          "y": 310.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 650.0,
+          "y": 380.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 480.0,
+          "y": 240.0
+        },
+        "type": "FLAT",
+        "rotation": 90.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 0.0,
+      "y": -1.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 740.0,
+        "y": 300.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 130.0,
+      "y": 290.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 660.0,
+          "y": 310.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      },
+      {
+        "position": {
+          "x": 570.0,
+          "y": 380.0
+        },
+        "type": "FLAT",
+        "rotation": 135.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": 0.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 470.0,
+        "y": 240.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 30.0,
+      "y": 30.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 570.0,
+          "y": 240.0
         },
         "type": "FLAT",
         "rotation": 45.0
       },
       {
         "position": {
-          "x": 414.0,
-          "y": 280.0
+          "x": 650.0,
+          "y": 310.0
         },
         "type": "FLAT",
-        "rotation": -45.0
+        "rotation": 135.0
       }
     ],
     "initialLightDirection": {
       "x": 1.0,
-      "y": 0.4
+      "y": -1.0
     },
     "isDoorHorizontal": true
   },
   {
     "lightSourcePositions": [
       {
-        "x": 185.0,
-        "y": 114.0
+        "x": 290.0,
+        "y": 240.0
       }
     ],
     "targetDoorPos": {
-      "x": 579.0,
-      "y": 286.0
+      "x": 860.0,
+      "y": 290.0
     },
     "mirrors": [
       {
         "position": {
-          "x": 278.0,
-          "y": 147.0
+          "x": 480.0,
+          "y": 240.0
         },
         "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 413.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
+        "rotation": 135.0
       }
     ],
     "initialLightDirection": {
       "x": 1.0,
-      "y": 0.4
+      "y": 0.0
     },
-    "isDoorHorizontal": true
+    "isDoorHorizontal": false
   },
   {
     "lightSourcePositions": [
       {
-        "x": 190.0,
-        "y": 116.0
+        "x": 740.0,
+        "y": 240.0
       }
     ],
     "targetDoorPos": {
-      "x": 576.0,
-      "y": 284.0
+      "x": 130.0,
+      "y": 290.0
     },
     "mirrors": [
       {
         "position": {
-          "x": 282.0,
-          "y": 148.0
+          "x": 660.0,
+          "y": 310.0
         },
         "type": "FLAT",
-        "rotation": 45.0
+        "rotation": 135.0
       },
       {
         "position": {
-          "x": 412.0,
-          "y": 280.0
+          "x": 570.0,
+          "y": 380.0
         },
         "type": "FLAT",
-        "rotation": -45.0
+        "rotation": 135.0
       }
     ],
     "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
+      "x": -1.0,
+      "y": 0.0
     },
-    "isDoorHorizontal": true
+    "isDoorHorizontal": false
   },
   {
     "lightSourcePositions": [
       {
-        "x": 195.0,
-        "y": 118.0
+        "x": 470.0,
+        "y": 100.0
       }
     ],
     "targetDoorPos": {
-      "x": 573.0,
-      "y": 282.0
+      "x": 130.0,
+      "y": 290.0
     },
     "mirrors": [
       {
         "position": {
-          "x": 286.0,
-          "y": 149.0
+          "x": 570.0,
+          "y": 310.0
         },
         "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 411.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
+        "rotation": 135.0
       }
     ],
     "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
+      "x": 0.0,
+      "y": 1.0
     },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 200.0,
-        "y": 120.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 570.0,
-      "y": 280.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 290.0,
-          "y": 150.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 410.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 205.0,
-        "y": 122.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 567.0,
-      "y": 278.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 294.0,
-          "y": 151.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 409.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 210.0,
-        "y": 124.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 564.0,
-      "y": 276.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 298.0,
-          "y": 152.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 408.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 215.0,
-        "y": 126.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 561.0,
-      "y": 274.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 302.0,
-          "y": 153.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 407.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 220.0,
-        "y": 128.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 558.0,
-      "y": 272.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 306.0,
-          "y": 154.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 406.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 225.0,
-        "y": 130.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 555.0,
-      "y": 270.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 310.0,
-          "y": 155.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 405.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 230.0,
-        "y": 132.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 552.0,
-      "y": 268.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 314.0,
-          "y": 156.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 404.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 235.0,
-        "y": 134.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 549.0,
-      "y": 266.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 318.0,
-          "y": 157.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 403.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 240.0,
-        "y": 136.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 546.0,
-      "y": 264.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 322.0,
-          "y": 158.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 402.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 245.0,
-        "y": 138.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 543.0,
-      "y": 262.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 326.0,
-          "y": 159.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 401.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
-  },
-  {
-    "lightSourcePositions": [
-      {
-        "x": 250.0,
-        "y": 140.0
-      }
-    ],
-    "targetDoorPos": {
-      "x": 540.0,
-      "y": 260.0
-    },
-    "mirrors": [
-      {
-        "position": {
-          "x": 330.0,
-          "y": 160.0
-        },
-        "type": "FLAT",
-        "rotation": 45.0
-      },
-      {
-        "position": {
-          "x": 400.0,
-          "y": 280.0
-        },
-        "type": "FLAT",
-        "rotation": -45.0
-      }
-    ],
-    "initialLightDirection": {
-      "x": 1.0,
-      "y": 0.4
-    },
-    "isDoorHorizontal": true
+    "isDoorHorizontal": false
   }
 ]

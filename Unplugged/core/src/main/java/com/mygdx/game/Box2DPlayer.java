@@ -28,7 +28,7 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
     protected static int up = Keys.W, speedingKey = Keys.SHIFT_LEFT, left = Keys.A, down = Keys.S, right = Keys.D;
 
     private Vector2 velocity, playerPosition;
-    private float speed = 100, gravity = 80, width, height;
+    private float speed = 60, gravity = 80, width, height;
     private float density = 0.09f, animationTime = 0, countTime = 0, damageTime = 0, deathTime = 0;
     private int heartNumber = 3, point = 0, currentMap = 0;
     private Body body;
@@ -204,12 +204,12 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
             velocity.y = -speed;
         }
 
-        if ((listener.onContactWithFireball() || listener.onContactWithLava()) && damageTime >= 3f) {
+        if ((listener.onContactWithFireball()) && damageTime >= 3f) {
             heartNumber--;
             damageTime = 0;
             hasTakenDamage = true;
         }
-        if ( listener.onContactWithLava() && damageTime >= 3f) {
+        if ( listener.onContactWithLava()) {
             heartNumber = 0;
             damageTime = 0;
             hasTakenDamage = true;
@@ -242,7 +242,6 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
         canJump = listener.isPlayerOnGround();
         //body.applyForceToCenter(velocity, true);
         body.setLinearVelocity(velocity);
-        //body.setLinearVelocity(velocity);
         if (hasTakenDamage && damageTime >= 0.9f) {
             hasTakenDamage = false;
         }

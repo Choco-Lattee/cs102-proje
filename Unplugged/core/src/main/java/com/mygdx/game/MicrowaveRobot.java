@@ -194,7 +194,7 @@ public class MicrowaveRobot extends Sprite {
             player.setPoint(250);
             deathTime += delta;
         }
-        if (deathTime > 0.4f && !death) {
+        if (deathTime > 0.2f && !death) {
             death = true;
             world.destroyBody(body);
         }

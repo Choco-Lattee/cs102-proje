@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class PuzzleGame extends Game{
+public class PuzzleGame extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     public Level currentLevel;
@@ -65,25 +65,21 @@ public class PuzzleGame extends Game{
             return;
         }
 
-        this.currentLevel = level; 
-
-        System.out.println("Loaded level with " +
-        currentLevel.getMirrorCount() + " mirrors, " +
-        currentLevel.getLightCount() + " lights");
-
+        this.currentLevel = level;
         this.moveCount = 0;
         this.colorTimer = 0f;
         this.currentRainbowIndex = 0;
         this.currentBackgroundColor = Color.LIGHT_GRAY;
 
+        // Set up UI stage
         stage = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("assets/PuzzleAssets/skin/plain-james-ui.json"));
         setupUI();
-        Gdx.input.setInputProcessor(stage);
-        ((Game) Gdx.app.getApplicationListener()).setScreen(new LevelScreen(this));
+
+        // InputProcessor will be set in LevelScreen (do not set it here)
+        setScreen(new LevelScreen(this));
         saveProgress();
     }
-
 
     private void setupUI() {
         Table table = new Table();
@@ -97,6 +93,7 @@ public class PuzzleGame extends Game{
         TextButton save = new TextButton("Save", skin);
         TextButton menu = new TextButton("Menu", skin);
 
+        // Each button has its own ClickListener
         info.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent e, float x, float y) {
@@ -127,7 +124,7 @@ public class PuzzleGame extends Game{
         });
 
         save.addListener(new ClickListener() {
-             @Override
+            @Override
             public void clicked(InputEvent e, float x, float y) {
                 saveProgress();
                 Dialog dialog = new Dialog("Saved", skin);
@@ -169,17 +166,20 @@ public class PuzzleGame extends Game{
             attempts++;
         }
 
-        currentLevelIndex = newIndex;
-        Level newLevel = LevelStorage.getLevel(currentLevelType, currentLevelIndex);
+        if (newIndex < 0 || newIndex >= total) {
+            System.err.println("Invalid index selected for type: " + currentLevelType);
+            return;
+        }
+
+        Level newLevel = LevelStorage.getLevel(currentLevelType, newIndex);
         if (newLevel != null) {
+            currentLevelIndex = newIndex;
             System.out.println("Skipping to " + currentLevelType + " level index: " + currentLevelIndex);
             loadLevel(newLevel);
         } else {
-            System.err.println("Failed to load level: " + currentLevelType + " index: " + currentLevelIndex);
+            System.err.println("Failed to load level: " + currentLevelType + " index: " + newIndex);
         }
     }
-
-
 
     public void returnToMenu() {
         if (stage != null) {
@@ -221,12 +221,17 @@ public class PuzzleGame extends Game{
 
     @Override
     public void resize(int width, int height) {
-        if (camera != null) {
-            camera.setToOrtho(false, width, height);
-            camera.update();
+        camera.viewportWidth = width;
+        camera.viewportHeight = height;
+        camera.update();
+
+        if (stage != null) {
+            stage.getViewport().update(width, height, true);
         }
-        if (stage != null) stage.getViewport().update(width, height, true);
-        if (currentLevel != null) currentLevel.reset();
+
+        if (currentLevel != null) {
+            currentLevel.reset();
+        }
     }
 
     @Override

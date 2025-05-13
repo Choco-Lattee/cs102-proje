@@ -12,7 +12,6 @@ public class Mirror {
     private final float width = 80f;
     private final float height = 20f;
     private final String type;
-
     private Polygon bounds;
 
     public Mirror(Vector2 position, String type, float rotation) {
@@ -23,20 +22,29 @@ public class Mirror {
     }
 
     private void updatePolygon() {
-        float hw = width / 2f;
-        float hh = height / 2f;
-
         float[] vertices = new float[] {
-            -hw, -hh,
-             hw, -hh,
-             hw,  hh,
-            -hw,  hh
+            -width/2, -height/2,
+            width/2, -height/2,
+            width/2, height/2,
+            -width/2, height/2
         };
 
         bounds = new Polygon(vertices);
-        bounds.setOrigin(0, 0); // dönme merkezi: kendi merkezi
         bounds.setPosition(position.x, position.y);
         bounds.setRotation(rotation);
+    }
+
+    public boolean containsPoint(Vector2 point) {
+        return bounds.contains(point.x, point.y);
+    }
+
+    public void rotateBy(float degrees) {
+        rotation = normalizeRotation(rotation + degrees);
+        updatePolygon();
+    }
+
+    private float normalizeRotation(float degrees) {
+        return ((Math.round(degrees / 45f) * 45f) % 360f);
     }
 
     public RayHit intersect(RaySegment ray) {
@@ -50,18 +58,16 @@ public class Mirror {
             Vector2 p1 = new Vector2(verts[i], verts[i + 1]);
             Vector2 p2 = new Vector2(verts[(i + 2) % verts.length], verts[(i + 3) % verts.length]);
 
-            if (Intersector.intersectSegments(ray.getStart(), ray.getEnd(), p1, p2, intersection)) {
-                float dist = ray.getStart().dst2(intersection);
+            Vector2 temp = new Vector2();
+            if (Intersector.intersectSegments(ray.getStart(), ray.getEnd(), p1, p2, temp)) {
+                float dist = ray.getStart().dst2(temp);
                 if (dist < minDist) {
                     minDist = dist;
-                    closest = intersection.cpy();
+                    closest = temp.cpy();
                     Vector2 edge = p2.cpy().sub(p1).nor();
                     normal = new Vector2(-edge.y, edge.x).nor();
-
-                    // ışın p1 → p2 yönüne göre gelmiyorsa düzelt
-                    Vector2 dir = ray.getEnd().cpy().sub(ray.getStart()).nor();
-                    if (normal.dot(dir) > 0f) {
-                        normal.scl(-1); // iç yüzeyden geliyor → dışa çevir
+                    if (normal.dot(ray.getEnd().cpy().sub(ray.getStart())) > 0) {
+                        normal.scl(-1);
                     }
                 }
             }
@@ -76,49 +82,36 @@ public class Mirror {
 
     public Vector2 reflect(Vector2 inDir, Vector2 normal, Vector2 hitPoint) {
         Vector2 reflected = inDir.cpy().sub(normal.cpy().scl(2 * inDir.dot(normal))).nor();
-         switch (type) {
-            case "CONVEX":
-             return reflected.rotateDeg(20f).nor();
-            case "CONCAVE":
-              return reflected.lerp(position.cpy().sub(hitPoint).nor(), 0.5f).nor();
-            default:
-             return reflected;
+
+        if ("CONVEX".equals(type)) {
+            return reflected.rotateDeg(15f).nor();
+        } else if ("CONCAVE".equals(type)) {
+            return hitPoint.cpy().sub(position).nor();
+        } else {
+            return reflected;
         }
     }
 
     public void draw(ShapeRenderer renderer) {
-        Color color;
-        switch (type) {
-            case "CONVEX":
-              color = Color.PINK;
-            case "CONCAVE":
-             color = Color.ORANGE;
-            default:
-             color = Color.SKY;
+        if ("CONVEX".equals(type)) {
+            renderer.setColor(Color.PINK);
+        } else if ("CONCAVE".equals(type)) {
+            renderer.setColor(Color.ORANGE);
+        } else {
+            renderer.setColor(Color.SKY);
         }
-        renderer.setColor(color);
 
         float[] verts = bounds.getTransformedVertices();
+
         renderer.triangle(verts[0], verts[1], verts[2], verts[3], verts[4], verts[5]);
         renderer.triangle(verts[4], verts[5], verts[6], verts[7], verts[0], verts[1]);
+
     }
 
-    public void rotateBy(float degrees) {
-        rotation = normalizeRotation(rotation + degrees);
-        updatePolygon();
-    }
 
-    private float normalizeRotation(float degrees) {
-        float normalized = ((Math.round(degrees / 45f) * 45f) % 360f + 360f) % 360f;
-        return normalized;
-    }
 
     public Mirror copy() {
         return new Mirror(position.cpy(), type, rotation);
-    }
-
-    public Polygon getBounds() {
-        return bounds;
     }
 
     public Vector2 getPosition() {

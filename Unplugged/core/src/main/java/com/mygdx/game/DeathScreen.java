@@ -30,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class DeathScreen implements Screen{
     private SpriteBatch batch;
-    private Sprite splash;
+    private Sprite splash, napolion;
     private Stage stage;
     private Table table;
     private TextureAtlas atlas;
@@ -58,7 +58,11 @@ public class DeathScreen implements Screen{
 
 
         Texture splashTexture = new Texture("assets/Background.png");
+        Texture napTex = new Texture("assets/death_screen_background.jpg");
         splash = new Sprite(splashTexture);
+        napolion = new Sprite(napTex);
+        napolion.setSize(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
+        napolion.setPosition(GAME_WORLD_WIDTH /3 , GAME_WORLD_HEIGHT / 5);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         stage.getViewport().apply();
@@ -158,6 +162,7 @@ public class DeathScreen implements Screen{
 
         batch.begin();
         splash.draw(batch);
+        napolion.draw(batch);
         batch.end();
 
         stage.act(delta);
@@ -169,6 +174,7 @@ public class DeathScreen implements Screen{
         stage.getViewport().update(width, height);
         stage.getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         splash.setSize(width, height);
+        napolion.setSize(width / 4, height / 4);
         table.invalidateHierarchy();
         table.setClip(true);
         table.setSize(width, height);
