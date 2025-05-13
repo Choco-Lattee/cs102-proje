@@ -130,8 +130,6 @@ public class InterrogationScreen implements Screen {
 
                         CrimeSceneScreen.point += addFinalPoint;
                         showPoints = true;
-                        // win
-                        // delay eklenecek
                         if(!isThisPlayedBefore)
                         {
                             
@@ -140,8 +138,6 @@ public class InterrogationScreen implements Screen {
                         else
                         {
                             game.setScreen(new DetectiveEndScreen(game,evidences,foundEvidences));
-                            //TODO Talha main oyuna geçiş burdan olcak
-                            // CrimeSceneScreen.point toplam puan onu çekmeyi unutma (static variable)
                         }
                             
                     
