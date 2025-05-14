@@ -211,44 +211,50 @@ public class Play implements Screen{
         TextureRegion f3 = atlas.findRegion("furnace3");
         TextureRegion f4 = atlas.findRegion("furnace4");
 
-        furnaces.add(new Furnace(f1, 1, 966.64435f, 188.32227f, world));
-        furnaces.add(new Furnace(f1, 1, 887.74445f, 188.32227f, world));
-        furnaces.add(new Furnace(f1, 1, 808.611f, 189.54448f, world));
-        furnaces.add(new Furnace(f1, 1, 727.68884f, 189.61115f, world));
-        furnaces.add(new Furnace(f1, 1, 647.46655f, 189.61115f, world));
-        furnaces.add(new Furnace(f1, 1, 567.50006f, 189.61115f, world));
-        furnaces.add(new Furnace(f1, 1, 170.34648f, 492.83008f, world));
-        furnaces.add(new Furnace(f1, 1, 103.34646f, 558.3412f, world));
-        furnaces.add(new Furnace(f1, 1, 105.24645f, 492.83008f, world));
-        furnaces.add(new Furnace(f1, 1, 39.40201f, 492.83008f, world));
-        furnaces.add(new Furnace(f1, 1, 43.44646f, 561.019f, world));
-        furnaces.add(new Furnace(f1, 1, 506.13525f, 573.25696f, world));
-        furnaces.add(new Furnace(f1, 1, 570.21295f, 573.25696f, world));
-        furnaces.add(new Furnace(f1, 1, 775.95984f, 477.09695f, world));
-        furnaces.add(new Furnace(f1, 1, 824.0595f, 510.73523f, world));
-        furnaces.add(new Furnace(f1, 1, 338.5419f, 790.49335f, world));
-        furnaces.add(new Furnace(f1, 1, 522.7871f, 876.2289f, world));
-        furnaces.add(new Furnace(f1, 1, 504.09824f, 828.4735f, world));
-        furnaces.add(new Furnace(f1, 1, 601.3431f, 828.87354f, world));
-        furnaces.add(new Furnace(f1, 1, 584.25433f, 878.00696f, world));
-        furnaces.add(new Furnace(f1, 1, 792.04333f, 797.67334f, world));
-        furnaces.add(new Furnace(f1, 1, 169.1672f, 555.83514f, world));
-        
-        furnaces.add(new Furnace(f2, 2, 955.2886f, 292.0111f, world));
-        furnaces.add(new Furnace(f2, 2, 827.655f, 293.0111f, world));
-        furnaces.add(new Furnace(f2, 2, 411.45584f, 197.56262f, world));
-        furnaces.add(new Furnace(f2, 2, 297.8002f, 197.56262f, world));
-        furnaces.add(new Furnace(f2, 2, 297.68912f, 361.21835f, world));
-        furnaces.add(new Furnace(f2, 2, 411.34476f, 357.35168f, world));
-        furnaces.add(new Furnace(f2, 2, 714.255f, 871.5306f, world));
-        furnaces.add(new Furnace(f2, 2, 714.9993f, 806.0196f, world));
+        TextureRegion ft1 = atlas.findRegion("furnace1_transparent");
+        TextureRegion ft2 = atlas.findRegion("furnace2_transparent");
+        TextureRegion ft3 = atlas.findRegion("furnace3_transparent");
+        TextureRegion ft4 = atlas.findRegion("furnace4_transparent");
 
-        furnaces.add(new Furnace(f3, 3, 513.5876f, 293.6103f, world));
-        furnaces.add(new Furnace(f3, 3, 532.36487f, 488.38193f, world));
-        furnaces.add(new Furnace(f3, 3, 902.9159f, 800.62006f, world));
+        furnaces.add(new Furnace(f1, ft1, 1, 966.64435f, 188.32227f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 887.74445f, 188.32227f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 808.611f, 189.54448f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 727.68884f, 189.61115f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 647.46655f, 189.61115f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 567.50006f, 189.61115f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 170.34648f, 492.83008f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 103.34646f, 558.3412f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 105.24645f, 492.83008f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 39.40201f, 492.83008f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 43.44646f, 561.019f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 506.13525f, 573.25696f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 570.21295f, 573.25696f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 775.95984f, 477.09695f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 824.0595f, 510.73523f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 338.5419f, 790.49335f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 522.7871f, 876.2289f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 504.09824f, 828.4735f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 601.3431f, 828.87354f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 584.25433f, 878.00696f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 792.04333f, 797.67334f, world, player));
+        furnaces.add(new Furnace(f1, ft1, 1, 169.1672f, 555.83514f, world, player));
         
-        furnaces.add(new Furnace(f4, 4, 355.268f, 270.06393f, world));
-        furnaces.add(new Furnace(f4, 4, 803.2529f, 578.0882f, world));
+        furnaces.add(new Furnace(f2, ft2, 2, 970.2886f, 280.0111f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 812.655f, 280.0111f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 890.655f, 280.0111f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 411.45584f, 197.56262f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 297.8002f, 197.56262f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 297.68912f, 361.21835f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 411.34476f, 357.35168f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 714.255f, 871.5306f, world, player));
+        furnaces.add(new Furnace(f2, ft2, 2, 714.9993f, 806.0196f, world, player));
+
+        furnaces.add(new Furnace(f3, ft3, 3, 513.5876f, 293.6103f, world, player));
+        furnaces.add(new Furnace(f3, ft3, 3, 532.36487f, 488.38193f, world, player));
+        furnaces.add(new Furnace(f3, ft3, 3, 902.9159f, 800.62006f, world, player));
+        
+        furnaces.add(new Furnace(f4, ft4, 4, 355.268f, 270.06393f, world, player));
+        furnaces.add(new Furnace(f4, ft4, 4, 803.2529f, 578.0882f, world, player));
         
         for(Furnace furnace: furnaces){
             sprites.add(furnace);
