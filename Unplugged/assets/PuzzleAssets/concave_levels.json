@@ -1,0 +1,177 @@
+[
+  {
+    "lightSourcePositions": [
+      {
+        "x": 850.0,
+        "y": 390.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 180.0,
+      "y": 220.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 690.0,
+          "y": 330.0
+        },
+        "type": "CONCAVE",
+        "rotation": 90.0
+      },
+      {
+        "position": {
+          "x": 570.0,
+          "y": 330.0
+        },
+        "type": "CONCAVE",
+        "rotation": 0.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": -1.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 610.0,
+        "y": 340.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 880.0,
+      "y": 240.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 690.0,
+          "y": 270.0
+        },
+        "type": "CONCAVE",
+        "rotation": 45.0
+      },
+      {
+        "position": {
+          "x": 530.0,
+          "y": 340.0
+        },
+        "type": "CONCAVE",
+        "rotation": 0.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 0.0,
+      "y": -1.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 830.0,
+        "y": 320.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 150.0,
+      "y": 250.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 690.0,
+          "y": 270.0
+        },
+        "type": "CONCAVE",
+        "rotation": 45.0
+      },
+      {
+        "position": {
+          "x": 570.0,
+          "y": 330.0
+        },
+        "type": "CONCAVE",
+        "rotation": 90.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": 0.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 760.0,
+        "y": 210.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 140.0,
+      "y": 250.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 690.0,
+          "y": 270.0
+        },
+        "type": "CONCAVE",
+        "rotation": 90.0
+      },
+      {
+        "position": {
+          "x": 570.0,
+          "y": 330.0
+        },
+        "type": "CONCAVE",
+        "rotation": 0.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": 1.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 740.0,
+        "y": 160.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 330.0,
+      "y": 270.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 640.0,
+          "y": 230.0
+        },
+        "type": "CONCAVE",
+        "rotation": 90.0
+      },
+      {
+        "position": {
+          "x": 530.0,
+          "y": 270.0
+        },
+        "type": "CONCAVE",
+        "rotation": 0.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": 1.0
+    },
+    "isDoorHorizontal": false
+  }
+]

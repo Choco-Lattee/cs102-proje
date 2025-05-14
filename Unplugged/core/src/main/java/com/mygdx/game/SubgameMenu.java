@@ -55,7 +55,7 @@ public class SubgameMenu implements Screen {
         stage = new Stage(viewport);
 
 
-        Texture splashTexture = new Texture("Unplugged/assets/Background.png");
+        Texture splashTexture = new Texture("assets/Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -63,15 +63,15 @@ public class SubgameMenu implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-        atlas = new TextureAtlas("Unplugged/assets/button.atlas");
+        atlas = new TextureAtlas("assets/button.atlas");
         skin = new Skin(atlas);
 
         table = new Table(skin);
         //table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.setFillParent(true);
 
-        white = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
 
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button.normal");
@@ -107,10 +107,10 @@ public class SubgameMenu implements Screen {
                     @Override
                     public void run() {
                         if (list.getSelected().equals("Stealth")) {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());                            
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new Play());                            
                         }
                         if (list.getSelected().equals("Light Puzzle Game")) {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen(new PuzzleGame()));                           
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new PuzzleGame());                           
                         }
                         if (list.getSelected().equals("Decetive Puzzle Game")) {
                             ((Game) Gdx.app.getApplicationListener()).setScreen(new CrimeSceneScreen(new CrimeSceneGame()));                            

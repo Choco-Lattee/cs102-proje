@@ -64,28 +64,28 @@ public class MainMenu implements Screen {
         batch = new SpriteBatch();
         stage = new Stage(viewport);
 
-        Texture splashTexture = new Texture("Unplugged/assets/Background.png");
+        Texture splashTexture = new Texture("assets/Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         stage.getViewport().apply();
         Gdx.input.setInputProcessor(stage);
 
-        atlas = new TextureAtlas("Unplugged/assets/menuTools.atlas");
+        atlas = new TextureAtlas("assets/menuTools.atlas");
         skin = new Skin(atlas);
 
         table = new Table(skin);
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        menuTexture = new Texture("Unplugged/assets/ui/menu.png");
+        menuTexture = new Texture("assets/ui/menu.png");
         menuImage = new Image(menuTexture);
         menuImage.setSize(menuTexture.getWidth() * 5, menuTexture.getHeight() * 5);
 
         imageToStageWitdth = menuImage.getWidth() / GAME_WORLD_WIDTH;
         imageToStageHeight = menuImage.getHeight() / GAME_WORLD_HEIGHT;
 
-        white = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("Unplugged/assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
 
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button.normal");

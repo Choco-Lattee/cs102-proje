@@ -1,0 +1,107 @@
+[
+  {
+    "lightSourcePositions": [
+      {
+        "x": 120.0,
+        "y": 300.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 870.0,
+      "y": 300.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 370.0,
+          "y": 300.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      },
+      {
+        "position": {
+          "x": 470.0,
+          "y": 230.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 1.0,
+      "y": 0.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 520.0,
+        "y": 210.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 160.0,
+      "y": 270.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 470.0,
+          "y": 230.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      },
+      {
+        "position": {
+          "x": 370.0,
+          "y": 300.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": -1.0,
+      "y": 0.0
+    },
+    "isDoorHorizontal": false
+  },
+  {
+    "lightSourcePositions": [
+      {
+        "x": 120.0,
+        "y": 330.0
+      }
+    ],
+    "targetDoorPos": {
+      "x": 870.0,
+      "y": 230.0
+    },
+    "mirrors": [
+      {
+        "position": {
+          "x": 370.0,
+          "y": 300.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      },
+      {
+        "position": {
+          "x": 470.0,
+          "y": 230.0
+        },
+        "type": "CONVEX",
+        "rotation": 45.0
+      }
+    ],
+    "initialLightDirection": {
+      "x": 1.0,
+      "y": -0.5
+    },
+    "isDoorHorizontal": false
+  }
+]
