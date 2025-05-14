@@ -72,6 +72,7 @@ public class Play implements Screen{
     private ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     private boolean playerDied = false;
     private boolean playerSucceed = false;
+    private ArrayList<Droid> droids = new ArrayList<Droid>();
     
     @Override
     public void show() {
@@ -110,8 +111,85 @@ public class Play implements Screen{
         sprites.add(player);
 
     //droid
-        droid1 = new Droid(atlas, arr, player, world, rayHandler, map, furnaces);
-        sprites.add(droid1);
+        ArrayList<Vector2> arr = new ArrayList<Vector2>();
+        
+        arr.add(new Vector2( 935.1001f, 305.84714f));
+        arr.add(new Vector2(1001.9225f, 305.65826f));
+        arr.add(new Vector2(1001.9225f, 241.86932f));
+        arr.add(new Vector2(937.58923f, 241.86932f));
+        arr.add(new Vector2(930.58923f, 166.45299f));
+        arr.add(new Vector2(994.04474f, 166.45299f));
+        arr.add(new Vector2(1000.9417f, 241.98955f));
+        arr.add(new Vector2(935.69727f, 241.98955f));
+        arr.add(new Vector2(935.69727f, 305.64514f));
+        
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+        
+        arr.add(new Vector2(920.9314f, 170.35324f));
+        arr.add(new Vector2(920.9314f, 231.54213f));
+        arr.add(new Vector2(855.4204f, 231.54213f));
+        arr.add(new Vector2(855.4204f, 306.21994f));
+        arr.add(new Vector2(921.8314f, 305.85327f));
+        arr.add(new Vector2(918.9759f, 239.85324f));
+        arr.add(new Vector2(855.387f, 240.18658f));
+        arr.add(new Vector2(855.387f, 165.29126f));
+        arr.add(new Vector2(919.1533f, 166.80238f));
+               
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+
+        arr.add(new Vector2(726.26385f, 295.63647f));
+        arr.add(new Vector2(726.26385f, 241.55872f));
+        arr.add(new Vector2(848.27496f, 241.55872f));
+        arr.add(new Vector2(848.27496f, 167.70294f));
+        arr.add(new Vector2(769.33105f, 169.70296f));
+
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+        
+        arr.add(new Vector2(670.7234f, 301.94815f));
+        arr.add(new Vector2(590.9456f, 301.94815f));
+        arr.add(new Vector2(590.9456f, 169.3151f));
+        arr.add(new Vector2(678.8118f, 169.3151f));
+        arr.add(new Vector2(680.4451f, 235.94841f));
+        arr.add(new Vector2(559.55597f, 235.94841f));
+        arr.add(new Vector2(559.55597f, 304.9595f));
+        arr.add(new Vector2(673.6674f, 304.9595f));
+        
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+
+        arr.add(new Vector2(447.4366f, 175.4055f));
+        arr.add(new Vector2(447.4366f, 253.4055f));
+        arr.add(new Vector2(386.59213f, 253.4055f));
+        arr.add(new Vector2(386.59213f, 176.4388f));
+        arr.add(new Vector2(447.05878f, 176.4388f));
+        
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+        
+        arr.add(new Vector2(320.81424f, 176.4388f));
+        arr.add(new Vector2(320.81424f, 255.7388f));
+        arr.add(new Vector2(272.0809f, 255.7388f));
+        arr.add(new Vector2(272.0809f, 174.04987f));
+        arr.add(new Vector2(322.00308f, 174.04987f));
+        
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+        
+        arr.add(new Vector2(304.23163f, 318.503f));
+        arr.add(new Vector2(304.23163f, 224.48962f));
+        arr.add(new Vector2(404.5539f, 224.48962f));
+        arr.add(new Vector2(401.70944f, 319.7897f));
+        arr.add(new Vector2(319.02057f, 319.7897f));
+        
+        droids.add(new Droid(atlas, (ArrayList<Vector2>)arr.clone(), player, world, rayHandler, map, furnaces));
+        arr.clear();
+
+        for(Droid droid: droids){
+            sprites.add(droid);
+        }
 
     //cctv
         TextureRegion c = atlas.findRegion("cctv");

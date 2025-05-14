@@ -95,6 +95,13 @@ public class MyContactListener implements ContactListener{
                 npcRescued[2] = true;
             }
 
+            if (fa.getUserData().equals("Droid") && fb.getUserData().equals("player")) {
+                contactWithDroid = true;
+            }
+            if (fb.getUserData().equals("Droid") && fa.getUserData().equals("player")) {
+                contactWithDroid = true;
+            }
+
             try{
                 Integer.parseInt("" + fb.getUserData());
                 int temp = (int) fb.getUserData();
@@ -167,6 +174,14 @@ public class MyContactListener implements ContactListener{
             if (fb.getUserData().equals("foot") && fa.getUserData().equals("lava")) {
                 contactWithLava = false;
             }
+
+            if (fa.getUserData().equals("Droid") && fb.getUserData().equals("player")) {
+                contactWithDroid = false;
+            }
+            if (fb.getUserData().equals("Droid") && fa.getUserData().equals("player")) {
+                contactWithDroid = false;
+            }
+
 
             try{
                 Integer.parseInt("" + fb.getUserData());
