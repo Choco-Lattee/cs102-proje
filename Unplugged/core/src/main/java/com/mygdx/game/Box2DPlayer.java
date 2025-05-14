@@ -213,8 +213,6 @@ public class Box2DPlayer extends Sprite implements InputProcessor{
             heartNumber = 0;
             damageTime = 0;
             hasTakenDamage = true;
-        }
-        if (listener.onContactWithLava()) {
             speed = 30;
         }
         if (listener.onContactWithWater()) {

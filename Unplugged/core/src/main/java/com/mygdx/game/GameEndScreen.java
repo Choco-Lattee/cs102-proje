@@ -86,7 +86,7 @@ public class GameEndScreen implements Screen{
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = white;
         labelStyle.fontColor = Color.WHITE;
-        label = new Label("!YOU*WIN!", labelStyle);
+        label = new Label("!YOU WIN!", labelStyle);
 
         ListStyle listStyle = new ListStyle();
         listStyle.font = white;
