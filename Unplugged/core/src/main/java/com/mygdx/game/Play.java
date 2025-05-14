@@ -49,7 +49,7 @@ public class Play implements Screen{
     private ConeLight coneLight1;
     private ConeLight coneLight2;
     private Cctv cctv;
-    private boolean debug = true;
+    private boolean debug = false;
     private Viewport pauseViewport;
     private OrthographicCamera pauseCam;
     private SpriteBatch pauseBatch;
