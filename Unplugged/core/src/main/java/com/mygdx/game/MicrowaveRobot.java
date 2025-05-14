@@ -229,12 +229,12 @@ public class MicrowaveRobot extends Sprite {
                 fireballs.add(fireball);
                 fireballTime = 0;
             }
-            for (Fireball fireball: fireballs) {
-                fireball.setMovement(delta, lastWayRight, listener);
-            }
         }
         else {
             targetDetected = false;
+        }
+        for (Fireball fireball: fireballs) {
+            fireball.setMovement(delta, lastWayRight, listener);
         }
 
         if (deathTime == 0) {
