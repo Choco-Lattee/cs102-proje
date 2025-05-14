@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package io.github.some_example_name;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -119,6 +119,7 @@ public class Door extends Sprite{
     }
 
     public void update(float delta){
+
         if(contactListener.getAreDoorsOpen()[num - 1]){
             box.destroyFixture(box.getFixtureList().get(0));
             fixtureDef.isSensor = true;

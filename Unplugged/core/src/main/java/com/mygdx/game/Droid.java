@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package io.github.some_example_name;
 
 import java.util.ArrayList;
 
@@ -35,12 +35,16 @@ public class Droid extends Sprite{
     private ArrayList<Vector2> road;
     private ArrayList<Vector2> temp;
     private Body box;
-    private float speed = 0.5f;
+    private float speed = 3f;
     private int goalIndex = 1;
     private BodyDef boxDef;
     private FixtureDef fixtureDef;
+    private BodyDef contactBoxDef;
+    private FixtureDef contactFixtureDef;
     private PolygonShape boxShape;
+    private PolygonShape contactBoxShape;
     private boolean isAngry = false;
+    private boolean wasAngry = false;
     private char direction = 'w';
     private Player player;
     private ConeLight visionCone;
@@ -88,21 +92,34 @@ public class Droid extends Sprite{
         boxDef.type = BodyType.DynamicBody;
         boxDef.position.set(road.get(0));
         boxDef.fixedRotation = true;
-
+        
+        contactBoxDef = new BodyDef();
+        contactBoxDef.type = BodyType.DynamicBody;
+        contactBoxDef.position.set(road.get(0));
+        contactBoxDef.fixedRotation = true;
     //box shape------------------------------------
         boxShape = new PolygonShape();
-        boxShape.setAsBox(5f, 5);
-
+        boxShape.setAsBox(6f, 6);
+        
+        contactBoxShape = new PolygonShape();
+        contactBoxShape.setAsBox(10f, 10);
     //fixture definition--------------------------
         fixtureDef = new FixtureDef();
         fixtureDef.shape = boxShape;
         fixtureDef.friction = .75f;
         fixtureDef.restitution = .1f;
         fixtureDef.density = 5;
+
+        contactFixtureDef = new FixtureDef();
+        contactFixtureDef.shape = boxShape;
+        contactFixtureDef.friction = .75f;
+        contactFixtureDef.restitution = .1f;
+        contactFixtureDef.density = 5;
     //body-----------------------------------------
         this.world = world;
         box = world.createBody(boxDef);
         box.createFixture(fixtureDef);
+        box.createFixture(contactFixtureDef).setUserData("Droid");
         setPosition(road.get(0).x, road.get(0).y);
     //player---------------------------------------
         this.player = player;
@@ -121,12 +138,12 @@ public class Droid extends Sprite{
     }
 
 //RAY CASTING--------------------------------------------------------
-    public boolean isPlayerDetected(){
+    public boolean isPlayerDetected(float delta){
         boolean ret = false;
-        Vector2 bottomLeft = new Vector2(player.getBox().getPosition().x - 5f, player.getBox().getPosition().y - 10);
-        Vector2 bottomRight = new Vector2(player.getBox().getPosition().x + 5f, player.getBox().getPosition().y - 10);
-        Vector2 topLeft = new Vector2(player.getBox().getPosition().x - 5f, player.getBox().getPosition().y + 10);;
-        Vector2 topRight = new Vector2(player.getBox().getPosition().x + 5f, player.getBox().getPosition().y + 10);;
+        Vector2 bottomLeft = new Vector2(player.getBox().getPosition().x - 3f, player.getBox().getPosition().y - 6);
+        Vector2 bottomRight = new Vector2(player.getBox().getPosition().x + 3f, player.getBox().getPosition().y - 6);
+        Vector2 topLeft = new Vector2(player.getBox().getPosition().x - 3f, player.getBox().getPosition().y + 6);
+        Vector2 topRight = new Vector2(player.getBox().getPosition().x + 3f, player.getBox().getPosition().y + 6);
         Vector2 center = player.getBox().getPosition();
         Vector2 eye = new Vector2(box.getPosition().x - 5f, box.getPosition().y + 5);
 
@@ -138,14 +155,28 @@ public class Droid extends Sprite{
         rays.add(topRight);
         rays.add(center);
 
-        if(isPlayerInRadius() && !player.getIsCardBoard()){
+        if(player.getBeingChased() && !player.getIsCardBoard()){
             for(Vector2 ray: rays){
                 float angleRad = MathUtils.atan2(ray.y - eye.y, ray.x - eye.x);
                 float angleDeg = angleRad * MathUtils.radiansToDegrees;
                 boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < visionCone.getConeDegree();
 
-
+                if(!isAnyTiledObjectOnLine(map, eye, ray, furnaces)){
+                    System.out.println(player.getBeingChased() + " "+ player.getIsCardBoard());
+                    return true;
+                }
+            }
+        }
+        
+        if(isPlayerInRadius() && !player.getIsCardBoard()){
+            for(Vector2 ray: rays){
+                float angleRad = MathUtils.atan2(ray.y - eye.y, ray.x - eye.x);
+                float angleDeg = angleRad * MathUtils.radiansToDegrees;
+                boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < visionCone.getConeDegree();
+                
                 if(inCone && !isAnyTiledObjectOnLine(map, eye, ray, furnaces)){
+                    player.setBeingChased(true);
+                    System.out.println(inCone + " " + isAnyTiledObjectOnLine(map, eye, center, furnaces));
                     return true;
                 }
             }
@@ -155,7 +186,7 @@ public class Droid extends Sprite{
     }
     
     public boolean isPlayerInRadius(){
-        if(Math.abs(box.getPosition().dst(player.getBox().getPosition())) < 120f){
+        if(Math.abs(box.getPosition().dst(player.getBox().getPosition())) < 90f){
             return true;
         }
         
@@ -176,16 +207,15 @@ public class Droid extends Sprite{
                 }
             }
         }
-
+        
         for(Furnace furnace: furnaces){
             Rectangle rect = new Rectangle(furnace.getBox().getPosition().x - furnace.getWidth(), furnace.getBox().getPosition().y - furnace.getHeight(), furnace.getWidth() * 2, furnace.getHeight() * 2);
-
+            
             if(intersectsLineRectangle(start, end, rect)){
-                //System.out.println("Object");
                 return true;
             }
         }
-
+        
         return false;
     }
 
@@ -210,17 +240,15 @@ public class Droid extends Sprite{
         super.draw(batch);
         update(Gdx.graphics.getDeltaTime());
 
-        if(direction == 'w')
-            setPosition(box.getPosition().x - 60f, box.getPosition().y - 7);
-        else if(direction == 'e')   
-            setPosition(box.getPosition().x - 16f, box.getPosition().y - 7);
     }
-
+    
     public void update(float delta){
         //move on x
         setX(getX());
         //move on y
         setY(getY());
+
+        setPosition(box.getPosition().x - 55f, box.getPosition().y - 5f);
         
         Vector2 droidPos = getBox().getPosition();
         Vector2 goal = road.get(goalIndex);
@@ -233,8 +261,12 @@ public class Droid extends Sprite{
             goalIndex = (goalIndex + 1) % (road.size());
         }
         else{
+
+            Vector2 direction = new Vector2((road.get(goalIndex).x - box.getPosition().x), (road.get(goalIndex).y - box.getPosition().y));
             
-            box.setLinearVelocity((road.get(goalIndex).x - box.getPosition().x) * speed, (road.get(goalIndex).y - box.getPosition().y) * speed);
+            direction = direction.nor();
+
+            box.setLinearVelocity(direction.x * speed, direction.y * speed);
             
             if(Math.abs(box.getPosition().x - road.get(goalIndex).x) < 1){ 
                 box.setLinearVelocity(0, box.getLinearVelocity().y);
@@ -247,18 +279,31 @@ public class Droid extends Sprite{
             }
         }
         
-        if(isPlayerDetected()){
+        if(isPlayerDetected(delta)){
             isAngry = true;
             goalIndex = 1;
         }
         else isAngry = false;
         
         if(isAngry){
+            wasAngry = true;
             road.clear();
             road.add(player.getBox().getPosition());
             road.add(player.getBox().getPosition());
         }
         
+        else if (wasAngry){
+            wasAngry = false;
+            road = (ArrayList<Vector2>)temp.clone();
+            
+            for(int i = 0; i < road.size(); i++){
+                if(!isAnyTiledObjectOnLine(map, box.getPosition(), road.get(i), furnaces)){
+                    goalIndex = i;
+                    break;
+                }
+            }
+        }
+
         else{
             road = (ArrayList<Vector2>)temp.clone();
         }
@@ -287,10 +332,10 @@ public class Droid extends Sprite{
                     break;
                 }
     
-                if(animationHandler.isFinished()){
-                    player.setIsAlive(false);
-                    //System.out.println("PLAYER DIED");
-                }
+                // if(animationHandler.isFinished()){
+                //     player.setIsAlive(false);
+                //     //System.out.println("PLAYER DIED");
+                // }
             }
 
             else{

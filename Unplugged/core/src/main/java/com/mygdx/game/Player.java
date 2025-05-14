@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package io.github.some_example_name;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -28,9 +29,14 @@ public class Player extends Sprite implements InputProcessor{
     private PolygonShape boxShape;
     private char direction = 'w';
     private boolean isCardBoard = false;
-    private float timer = 5;
+    private float timerCardBoard = 5;
+    private float timerBeingChased = 0;
     private boolean isAlive = true;
+    private boolean beingChased = false;
     private ArrayList<Furnace> furnaces = new ArrayList<Furnace>();
+    private MyContactListener contactListener;
+    private float prevX;
+    private float prevY;
 
     private AnimationHandler animationHandler;
     private final String N_WALK= "walkingN";  
@@ -54,7 +60,7 @@ public class Player extends Sprite implements InputProcessor{
     private final String CB = "cardboard";
 
 
-    public Player(TextureAtlas atlas, ArrayList<Furnace> furnaces){
+    public Player(TextureAtlas atlas, ArrayList<Furnace> furnaces, MyContactListener contactListener){
         super(atlas.findRegion("walkingS"));
         Animation<TextureRegion> walkingN = new Animation<>(1 / 6f, atlas.findRegions("walkingN"), PlayMode.LOOP);
         Animation<TextureRegion> walkingNE = new Animation<>(1 / 6f, atlas.findRegions("walkingNE"), PlayMode.LOOP);
@@ -101,12 +107,12 @@ public class Player extends Sprite implements InputProcessor{
     //box------------------------------------------
         boxDef = new BodyDef();
         boxDef.type = BodyType.DynamicBody;
-        boxDef.position.set(900f, 250);
+        boxDef.position.set(1100f, 250);
         boxDef.fixedRotation = true;
 
     //box shape------------------------------------
         boxShape = new PolygonShape();
-        boxShape.setAsBox(5f, 5);
+        boxShape.setAsBox(6f, 6);
 
     //fixture definition--------------------------
         fixtureDef = new FixtureDef();
@@ -116,6 +122,7 @@ public class Player extends Sprite implements InputProcessor{
         fixtureDef.density = 5;
         
         this.furnaces = furnaces;
+        this.contactListener = contactListener;
     }
 
     @Override
@@ -127,12 +134,19 @@ public class Player extends Sprite implements InputProcessor{
     }
 
     public void update(float delta){
+
+        if(contactListener.isOnCantactWithDroid()){
+            isAlive = false;
+            System.out.println("PLAYER DIED");
+        }
+
         //move on x
         setX(getX());
         //move on y
         setY(getY());
 
         checkCardBoard(delta);
+        checkBeingChased(delta);
 
         if(box.getLinearVelocity().x < 10 || box.getLinearVelocity().x > -10)
             box.applyForceToCenter(getMovement().x,0, true);
@@ -253,9 +267,17 @@ public class Player extends Sprite implements InputProcessor{
     }
 
     public void checkCardBoard(float delta){
-        timer += delta;
+        timerCardBoard += delta;
 
-        if(timer > 3) isCardBoard = false;
+        if(timerCardBoard > 3) isCardBoard = false;
+    }
+
+    public void checkBeingChased(float delta){
+        timerBeingChased += delta;
+
+        if(timerBeingChased > 3){
+            beingChased = false;
+        } 
     }
 
 //GETTERS-----------------------------------------------------------
@@ -287,6 +309,14 @@ public class Player extends Sprite implements InputProcessor{
         return isAlive;
     }
 
+    public boolean getBeingChased(){
+        return beingChased;
+    }
+
+    public Vector2 getPrevPos(){
+        return new Vector2(prevX, prevY);
+    }
+
 //SETTERS------------------------------------------------------------
     public void setBox(Body box) {
         this.box = box;
@@ -294,6 +324,10 @@ public class Player extends Sprite implements InputProcessor{
 
     public void setIsAlive(boolean isAlive){
         this.isAlive = isAlive;
+    }
+
+    public void setBeingChased(boolean beingChased){
+        this.beingChased = beingChased;
     }
 
 //INPUT PROCESSOR----------------------------------------------------
@@ -349,9 +383,9 @@ public class Player extends Sprite implements InputProcessor{
             case 'c':
             System.out.println("keytyped C");
             
-            if(!isCardBoard && timer > 5){
+            if(!isCardBoard && timerCardBoard > 5){
                 isCardBoard = true;
-                timer = 0;
+                timerCardBoard = 0;
             }
             System.out.println(isCardBoard);
             break;
@@ -362,7 +396,24 @@ public class Player extends Sprite implements InputProcessor{
 
             System.out.println("keytyped E");
             for(Furnace furnace: furnaces){
-                if(Math.abs(furnace.getBox().getPosition().dst(box.getPosition())) < 35f && furnace.getBox().getPosition().dst(box.getPosition()) < min){
+                float maxDist = 0;
+
+                switch(furnace.getType()){
+                    case 1:
+                        maxDist = 35f;
+                        break;
+                    case 2:
+                        maxDist = 40f;
+                        break;
+                    case 3:
+                        maxDist = 55f;
+                        break;
+                    case 4:
+                        maxDist = 55f;
+                        break;
+                }
+
+                if(Math.abs(furnace.getBox().getPosition().dst(box.getPosition())) < maxDist && furnace.getBox().getPosition().dst(box.getPosition()) < min){
                     System.out.println("SUCCESFUL");
                     min = furnace.getBox().getPosition().dst(box.getPosition());
                     temp = furnace;
@@ -375,7 +426,7 @@ public class Player extends Sprite implements InputProcessor{
             break;
 
             case 'u':
-            System.out.println(box.getPosition().x + ", " + box.getPosition().y);
+            System.out.println(box.getPosition().x + "f, " + box.getPosition().y + "f");
             break;
         }
         return true;

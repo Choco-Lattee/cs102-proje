@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package io.github.some_example_name;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -24,10 +24,15 @@ public class Furnace extends Sprite{
     private float spriteX;
     private float spriteY;
     private Player player;
+    private Sprite spriteNormal;
+    private Sprite spriteTransparent;
 
-    public Furnace(TextureRegion textureRegion, int type, float x, float y, World world){
+    public Furnace(TextureRegion textureRegion, TextureRegion transparent, int type, float x, float y, World world, Player player){
         super(textureRegion);
         this.type = type;
+
+        spriteNormal = new Sprite(textureRegion);
+        spriteTransparent = new Sprite(transparent);
 
         switch(type){
             case 1:
@@ -77,12 +82,19 @@ public class Furnace extends Sprite{
         this.world = world;
         box = world.createBody(boxDef);
         box.createFixture(fixtureDef);
+        this.player = player;
         setPosition(box.getPosition().x + spriteX, box.getPosition().y + spriteY);
+        spriteNormal.setPosition(box.getPosition().x + spriteX, box.getPosition().y + spriteY);
+        spriteTransparent.setPosition(box.getPosition().x + spriteX, box.getPosition().y + spriteY);
     }
 
     @Override
     public void draw(Batch batch) {
-        super.draw(batch);
+        if(player.getBox().getPosition().y > box.getPosition().y)
+            spriteTransparent.draw(batch);
+        
+        else
+            spriteNormal.draw(batch);
     }
 
     public Body getBox() {
@@ -103,5 +115,15 @@ public class Furnace extends Sprite{
 
     public float getWidth(){
         return width;
+    }
+
+    @Override
+    public float getX() {
+        return box.getPosition().x;
+    }
+    
+    @Override
+    public float getY() {
+        return box.getPosition().y;
     }
 }

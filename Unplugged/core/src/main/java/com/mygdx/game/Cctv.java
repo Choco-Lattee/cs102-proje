@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package io.github.some_example_name;
 
 import java.util.ArrayList;
 
@@ -47,12 +47,12 @@ public class Cctv extends Sprite{
 
         switch(direction){
             case 1:
-            angle = 0;
-            angleLimit = 0;
+            angle = 300f;
+            angleLimit = 300;
             break;
             case 2:
-            angle = 120f;
-            angleLimit = 90f;
+            angle = 210f;
+            angleLimit = 210f;
             break;
         }
     }
@@ -60,10 +60,10 @@ public class Cctv extends Sprite{
     //RAY CASTING--------------------------------------------------------
     public boolean isPlayerDetected(){
         boolean ret = false;
-        Vector2 bottomLeft = new Vector2(player.getBox().getPosition().x - 5f, player.getBox().getPosition().y - 10);
-        Vector2 bottomRight = new Vector2(player.getBox().getPosition().x + 5f, player.getBox().getPosition().y - 10);
-        Vector2 topLeft = new Vector2(player.getBox().getPosition().x - 5f, player.getBox().getPosition().y + 10);;
-        Vector2 topRight = new Vector2(player.getBox().getPosition().x + 5f, player.getBox().getPosition().y + 10);;
+        Vector2 bottomLeft = new Vector2(player.getBox().getPosition().x - 3f, player.getBox().getPosition().y - 6);
+        Vector2 bottomRight = new Vector2(player.getBox().getPosition().x + 3f, player.getBox().getPosition().y - 6);
+        Vector2 topLeft = new Vector2(player.getBox().getPosition().x - 3f, player.getBox().getPosition().y + 6);
+        Vector2 topRight = new Vector2(player.getBox().getPosition().x + 3f, player.getBox().getPosition().y + 6);
         Vector2 center = player.getBox().getPosition();
         Vector2 eye = new Vector2(getX(), getY());
 
@@ -81,8 +81,9 @@ public class Cctv extends Sprite{
                 float angleDeg = angleRad * MathUtils.radiansToDegrees;
                 boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < visionCone.getConeDegree();
 
+                System.out.println(inCone + "-" + isAnyTiledObjectOnLine(map, eye, ray, furnaces));
                 if(inCone && !isAnyTiledObjectOnLine(map, eye, ray, furnaces)){
-                    System.out.println("PLAYER DETECTED");
+                    System.out.println("PLAYER DETECTED CCTV");
                     return true;
                 }
             }
@@ -125,7 +126,6 @@ public class Cctv extends Sprite{
             }
         }
 
-
         return false;
     }
 
@@ -159,10 +159,11 @@ public class Cctv extends Sprite{
 
         if(isPlayerDetected()){
             visionCone.setDirection(angleDeg);
+            player.setBeingChased(true);
         }
 
         else{
-            if(angle + increment < angleLimit + 60f && angle + increment > angleLimit + 30f){
+            if(angle + increment < angleLimit + 60f && angle + increment > angleLimit - 30f){
                 angle = angle + increment;
                 visionCone.setDirection(angle);
             }
