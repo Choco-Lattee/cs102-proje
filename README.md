@@ -19,7 +19,7 @@ Development:
   - Detective Game:
 
   week4:
-  -No Meeting
+  - No Meeting
   - Stealth Game: 
   - Main Game:
   - Light Puzzle Game:
