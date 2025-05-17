@@ -10,6 +10,7 @@ Development:
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
+  - Menu Frames:
 
   week3:
   - discussion on game physics (stealth and main game)
@@ -17,6 +18,7 @@ Development:
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
+  - Menu Frames:
 
   week4:
   - No Meeting
@@ -24,12 +26,24 @@ Development:
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
+  -   - Menu Frames:
   
   week5:
-  
+  - collisionListener discussed, pause menu is added to other games, 
+  - Stealth Game: collision
+  - Main Game:
+  - Light Puzzle Game:
+  - Detective Game:
+  - Menu Frames:
+
   week6:
   - Games are merged together
   - Major asset handling problems solved
   - Stealth Game: droid attack animation added, droid movement fixed, droid animation fixed, player detection problems solved( cctv, droid), furnaces added, furnace functionality added, droids are multiplied, death system added.
+  - Main Game:
+  - Light Puzzle Game:
+  - Detective Game:
+  - Menu Frames:
+
   - Main Game:
   - Detective Game:
