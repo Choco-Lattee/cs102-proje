@@ -14,7 +14,7 @@ Development:
 
   week3:
   - discussion on game physics (stealth and main game)
-  - Stealth Game: LightCones added, droids are chasing a fixed point, player movement fixed
+  - Stealth Game: LightCones added, droids are chasing a fixed point, player movement fixed, input listener added
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
@@ -29,8 +29,8 @@ Development:
   - Menu Frames:
   
   week5:
-  - collisionListener discussed, pause menu is added to other games, 
-  - Stealth Game: collision
+  - collisionListener discussed, pause menu is added to other games, MyContactListener discussed
+  - Stealth Game: collision system added, death system added, input processor multiplier added, doors added
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
@@ -39,11 +39,8 @@ Development:
   week6:
   - Games are merged together
   - Major asset handling problems solved
-  - Stealth Game: droid attack animation added, droid movement fixed, droid animation fixed, player detection problems solved( cctv, droid), furnaces added, furnace functionality added, droids are multiplied, death system added.
+  - Stealth Game: droid attack animation added, droid movement fixed, droid animation fixed, player detection problems solved( cctv, droid), furnaces added, furnace functionality added, droids are multiplied
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
   - Menu Frames:
-
-  - Main Game:
-  - Detective Game:
