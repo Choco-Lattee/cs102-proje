@@ -57,8 +57,8 @@ public class DeathScreen implements Screen{
         stage = new Stage(viewport);
 
 
-        Texture splashTexture = new Texture("assets/Background.png");
-        Texture napTex = new Texture("assets/death_screen_background.jpg");
+        Texture splashTexture = new Texture("Background.png");
+        Texture napTex = new Texture("death_screen_background.jpg");
         splash = new Sprite(splashTexture);
         napolion = new Sprite(napTex);
         napolion.setSize(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
@@ -69,15 +69,15 @@ public class DeathScreen implements Screen{
 
         Gdx.input.setInputProcessor(stage);
 
-        atlas = new TextureAtlas("assets/button.atlas");
+        atlas = new TextureAtlas("button.atlas");
         skin = new Skin(atlas);
 
         table = new Table(skin);
         //table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.setFillParent(true);
 
-        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("font/black.fnt"), false);
 
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button.normal");

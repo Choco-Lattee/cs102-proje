@@ -17,6 +17,7 @@ public class MyContactListener implements ContactListener{
     private boolean[] areDoorsOpen = {false, false, false, false, false ,false};
     private boolean[] contactWithDoors = {false, false, false, false, false ,false};
     private boolean[] npcRescued = {false, false, false};
+    private boolean contactWithDroid;
 
     @Override
     public void beginContact(Contact contact) {
@@ -182,7 +183,6 @@ public class MyContactListener implements ContactListener{
                 contactWithDroid = false;
             }
 
-
             try{
                 Integer.parseInt("" + fb.getUserData());
                 int temp = (int) fb.getUserData();
@@ -210,6 +210,9 @@ public class MyContactListener implements ContactListener{
     }
     public boolean isOnContactWithNPC() {
         return contactWithNPC;
+    }
+    public boolean isOnContactWithDroid(){
+        return contactWithDroid;
     }
     public boolean onContactWithRobotAndPlayer() {
         return isContactWithRobot;

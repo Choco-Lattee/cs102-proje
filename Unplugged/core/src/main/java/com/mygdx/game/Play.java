@@ -76,19 +76,7 @@ public class Play implements Screen{
     
     @Override
     public void show() {
-        ArrayList<Vector2> arr = new ArrayList<Vector2>();
-        //arr.add(new Vector2(1100f,250));
-        arr.add(new Vector2(1000f,250));
-        arr.add(new Vector2(1000f,220));
-        arr.add(new Vector2(1000f,200));
-        arr.add(new Vector2(900f,200));
-        arr.add(new Vector2(900f,220));
-        arr.add(new Vector2(900f,250));
-
-        for(Vector2 vec: arr){
-            System.out.println("arr: x; " + vec.x + " y; " + vec.y);
-        }
-
+        
         contactListener = new MyContactListener();
         world = new World(new Vector2(0, 0), true);
         world.setContactListener(contactListener);
@@ -102,7 +90,7 @@ public class Play implements Screen{
         parser = new Box2DMapObjectParser();
         parser.load(world, map);
 
-        player = new Player(atlas, furnaces);
+        player = new Player(atlas, furnaces, contactListener);
         player.setPosition(330f, 125);
         //"1100f, 250"
 
@@ -193,7 +181,7 @@ public class Play implements Screen{
 
     //cctv
         TextureRegion c = atlas.findRegion("cctv");
-        cctv = new Cctv(1100f, 250, 2, c, rayHandler, player, map, furnaces);
+        cctv = new Cctv(355f, 550, 2, c, rayHandler, player, map, furnaces);
 
     //door
         TextureRegion d = atlas.findRegion("door");
@@ -273,7 +261,7 @@ public class Play implements Screen{
         pauseBatch = new SpriteBatch();
         pauseStage = new PauseStage(pauseViewport, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        Texture splashTexture = new Texture("assets/atlas/Background.png");
+        Texture splashTexture = new Texture("atlas/Background.png");
         pauseSprite = new Sprite(splashTexture);
         pauseSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -309,19 +297,21 @@ public class Play implements Screen{
         );
         rayHandler.setAmbientLight(0.75f);
 
-        coneLight1 = new ConeLight(rayHandler, 80, Color.BLUE, 120f, 0, 0, 90f, 45f);
-        coneLight1.setSoftnessLength(0f);
+        for(Droid droid: droids){
+            coneLight1 = new ConeLight(rayHandler, 80, Color.BLUE, 120f, 0, 0, 90f, 45f);
+            coneLight1.setSoftnessLength(0f);
+    
+            coneLight1.setPosition(droid.getBox().getPosition());
+            droid.setVisionCone(coneLight1);
+        }
 
-        coneLight1.setPosition(droid1.getBox().getPosition());
-        droid1.setVisionCone(coneLight1);
-
-        coneLight2 = new ConeLight(rayHandler, 80, Color.RED, 120f, 0, 0, 120f, 15f);
+        coneLight2 = new ConeLight(rayHandler, 80, Color.RED, 120f, 0, 0, 120f, 60f);
         coneLight2.setSoftnessLength(0f);
         coneLight2.setPosition(new Vector2(cctv.getX() + 20, cctv.getY() + 5));
         cctv.setVisionCone(coneLight2);
         
         player.getBoxShape().dispose();
-        droid1.getBoxShape().dispose();
+        //droid1.getBoxShape().dispose();
 
         pauseStage.getContinueButton().addListener(new ClickListener() {
             @Override
@@ -371,7 +361,6 @@ public class Play implements Screen{
             }
         });
     }
-    
 
     public void insertionSortY(ArrayList<Sprite> sprites){
         for(int i = 0; i < sprites.size(); i++){
@@ -407,7 +396,7 @@ public class Play implements Screen{
 
             renderer.getBatch().begin();
 
-            if(contactListener.getNpcRescued()[2]){
+            if(contactListener.getNpcRescued()[0]){
                 playerSucceed = true;
             }
 
@@ -437,7 +426,7 @@ public class Play implements Screen{
                 });
             }
 
-            droid1.draw(renderer.getBatch());
+            //droid1.draw(renderer.getBatch());
 
             for(Door door: doors){
                 door.draw(renderer.getBatch());
@@ -494,10 +483,7 @@ public class Play implements Screen{
         map.dispose();
         renderer.dispose();
         player.getTexture().dispose();
-        droid1.getTexture().dispose();
         cctv.getTexture().dispose();
-        // doors.get(0).getTexture().dispose();
-        // doors.get(0).getKey().getTexture().dispose();
     }
 
     @Override

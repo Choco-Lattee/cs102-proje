@@ -55,7 +55,7 @@ public class SaveLoadStage extends Stage {
     }
 
     private void setProperties() {
-        atlas = new TextureAtlas("assets/settings_tools.atlas");
+        atlas = new TextureAtlas("settings_tools.atlas");
         skin = new Skin(atlas);
 
         table = new Table(skin);
@@ -63,8 +63,8 @@ public class SaveLoadStage extends Stage {
         table.setBackground(skin.getDrawable("menu"));
 
 
-        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("font/black.fnt"), false);
         white.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         white.getData().setScale(1.5f,1.5f);
 

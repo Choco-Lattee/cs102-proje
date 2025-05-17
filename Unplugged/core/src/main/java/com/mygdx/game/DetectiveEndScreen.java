@@ -22,8 +22,8 @@ public class DetectiveEndScreen implements Screen {
     public boolean showPoints = true;
     public DetectiveEndScreen(final CrimeSceneGame game, ArrayList<Evidence> evidences, ArrayList<Evidence> foundEvidences) {
         this.game = game;
-        background = new Texture("assets/EndGameScreenBackground.png");
-        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
+        background = new Texture("EndGameScreenBackground.png");
+        fontWhite = new BitmapFont(Gdx.files.internal("font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         fontWhite.getData().setScale(3,3);
 

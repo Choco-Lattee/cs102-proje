@@ -1,108 +1,72 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
 public class TargetDoor {
-    private float x, y;
-    private boolean horizontal;
-    private boolean isOpen;
 
-    public TargetDoor(Object unused1, Object unused2, float x, float y, boolean horizontal) {
-        this.x = x;
-        this.y = y;
-        this.horizontal = horizontal;
-        this.isOpen = false;
+    private Vector2 position;
+    private boolean isHorizontal;
+    private boolean triggered;
+
+    private static final float WIDTH = 60f;
+    private static final float HEIGHT = 10f;
+    private static final float GAP = 20f; // visible gap size
+
+    public TargetDoor(Vector2 position, boolean isHorizontal) {
+        this.position = position;
+        this.isHorizontal = isHorizontal;
+        this.triggered = false;
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void open() {
-        isOpen = true;
-    }
-
-    public void close() {
-        isOpen = false;
-    }
-
-    public boolean isOpen() {
-        return isOpen;
-    }
-
-    public Vector2 getGapCenter() {
-        return new Vector2(x, y);
-    }
-
-    public List<Polygon> getDoorPolygons() {
-        List<Polygon> parts = new ArrayList<>();
-        float w = 30;
-        float h = 10;
-
-        if (horizontal) {
-            parts.add(new Polygon(new float[]{
-                -w, -h,
-                -10, -h,
-                -10, h,
-                -w, h
-            }));
-            parts.add(new Polygon(new float[]{
-                10, -h,
-                w, -h,
-                w, h,
-                10, h
-            }));
+    public void draw(ShapeRenderer sr) {
+        sr.setColor(triggered ? Color.GREEN : Color.GRAY);
+        if (isHorizontal) {
+            // Draw left and right sides of the door (gap in the middle)
+            float half = WIDTH / 2f;
+            float gapHalf = GAP / 2f;
+            sr.rect(position.x - half, position.y - HEIGHT / 2f, half - gapHalf, HEIGHT); // left
+            sr.rect(position.x + gapHalf, position.y - HEIGHT / 2f, half - gapHalf, HEIGHT); // right
         } else {
-            parts.add(new Polygon(new float[]{
-                -h, -w,
-                h, -w,
-                h, -10,
-                -h, -10
-            }));
-            parts.add(new Polygon(new float[]{
-                -h, 10,
-                h, 10,
-                h, w,
-                -h, w
-            }));
+            // Draw top and bottom parts with vertical gap
+            float half = WIDTH / 2f;
+            float gapHalf = GAP / 2f;
+            sr.rect(position.x - HEIGHT / 2f, position.y - half, HEIGHT, half - gapHalf); // bottom
+            sr.rect(position.x - HEIGHT / 2f, position.y + gapHalf, HEIGHT, half - gapHalf); // top
         }
-
-        for (Polygon p : parts) {
-            p.setPosition(x, y);
-        }
-
-        return parts;
     }
-    
+
+    public boolean intersects(RaySegment ray) {
+        Vector2 rayStart = ray.getStart();
+        Vector2 rayEnd = ray.getEnd();
+        Vector2 p1, p2;
+
+        if (isHorizontal) {
+            p1 = new Vector2(position.x - GAP / 2, position.y);
+            p2 = new Vector2(position.x + GAP / 2, position.y);
+        } else {
+            p1 = new Vector2(position.x, position.y - GAP / 2);
+            p2 = new Vector2(position.x, position.y + GAP / 2);
+        }
+
+        return Intersector.intersectSegments(rayStart, rayEnd, p1, p2, null);
+    }
+
+    public void setTriggered(boolean triggered) {
+        this.triggered = triggered;
+    }
+
+    public boolean isTriggered() {
+        return triggered;
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
     public boolean isHorizontal() {
-        return horizontal;
-    }
-
-    public void draw(ShapeRenderer renderer) {
-        float doorLength = 80f;
-        float doorThickness = 14f;
-        float gapSize = 20f;
-        Color wallColor = new Color(0.45f, 0.26f, 0.13f, 1f);
-
-        renderer.setColor(wallColor);
-        if (horizontal) {
-            float half = (doorLength - gapSize) / 2f;
-            renderer.rect(x - half - gapSize / 2, y - doorThickness / 2, half, doorThickness);
-            renderer.rect(x + gapSize / 2, y - doorThickness / 2, half, doorThickness);
-        } else {
-            float half = (doorLength - gapSize) / 2f;
-            renderer.rect(x - doorThickness / 2, y - half - gapSize / 2, doorThickness, half);
-            renderer.rect(x - doorThickness / 2, y + gapSize / 2, doorThickness, half);
-        }
+        return isHorizontal;
     }
 }

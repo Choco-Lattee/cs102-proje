@@ -12,16 +12,16 @@ import com.badlogic.gdx.utils.JsonValue;
 public class LevelStorage {
     private static final List<Level> flatLevels = new ArrayList<>();
     private static final List<Level> convexLevels = new ArrayList<>();
-    private static final List<Level> concaveLevels = new ArrayList<>(); 
-    
+    private static final List<Level> concaveLevels = new ArrayList<>();
+
     public static void loadAllLevels() {
         flatLevels.clear();
         convexLevels.clear();
         concaveLevels.clear();
 
-        flatLevels.addAll(loadSubset("assets/PuzzleAssets/flat_levels.json"));
-        convexLevels.addAll(loadSubset("assets/PuzzleAssets/convex_levels.json"));
-        concaveLevels.addAll(loadSubset("assets/PuzzleAssets/concave_levels.json"));
+        flatLevels.addAll(loadSubset("PuzzleAssets/flat_levels.json"));
+        convexLevels.addAll(loadSubset("PuzzleAssets/convex_levels.json"));
+        concaveLevels.addAll(loadSubset("PuzzleAssets/concave_levels.json"));
     }
 
     private static List<Level> loadSubset(String fileName) {
@@ -65,14 +65,17 @@ public class LevelStorage {
     public static Level getLevel(String type, int index) {
         Level original;
         switch (type.toUpperCase()) {
-            case"FLAT":
-             original = getSafe(flatLevels, index);
+            case "FLAT":
+                original = getSafe(flatLevels, index);
+                break;
             case "CONVEX":
-             original = getSafe(convexLevels, index);
+                original = getSafe(convexLevels, index);
+                break;
             case "CONCAVE":
-            getSafe(concaveLevels, index);
+                original = getSafe(concaveLevels, index);
+                break;
             default:
-            original = null;
+                original = null;
         }
         return original != null ? original.copy() : null;
     }
@@ -80,13 +83,13 @@ public class LevelStorage {
     public static int getLevelCount(String type) {
         switch (type.toUpperCase()) {
             case "FLAT":
-            return flatLevels.size();
+                return flatLevels.size();
             case "CONVEX":
-            return convexLevels.size();
+                return convexLevels.size();
             case "CONCAVE":
-            return concaveLevels.size();
+                return concaveLevels.size();
             default:
-             return 0;
+                return 0;
         }
     }
 

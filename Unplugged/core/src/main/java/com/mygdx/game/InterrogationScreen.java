@@ -61,7 +61,7 @@ public class InterrogationScreen implements Screen {
         this.evidences = evidences;
         this.foundEvidences = foundEvidences;
         Gdx.input.setInputProcessor(new CrimeSceneInputProcessor(this));
-        fontWhite = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"));
+        fontWhite = new BitmapFont(Gdx.files.internal("font/black.fnt"));
         fontWhite.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
         fontWhite.getData().setScale(2,2);
 

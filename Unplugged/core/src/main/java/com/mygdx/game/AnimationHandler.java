@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class AnimationHandler {
-    
+
     private float timer = 0;
     private boolean looping = true;
     private String current;
@@ -53,5 +53,4 @@ public class AnimationHandler {
         timer += delta;
         return animations.get(current).getKeyFrame(timer, looping); 
     }
-
 }

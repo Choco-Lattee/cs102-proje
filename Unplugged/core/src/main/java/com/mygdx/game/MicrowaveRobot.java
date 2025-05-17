@@ -37,16 +37,16 @@ public class MicrowaveRobot extends Sprite {
 
     public MicrowaveRobot(World world, Texture stillTex, float x, float y) {
         super(stillTex);
-        Texture stillLeftTex = new Texture("assets/Microwave/Idle.png");
-        Texture stillRightTex = new Texture("assets/Microwave/IdleRight.png");
-        Texture walkLeftTex = new Texture("assets/Microwave/Walk.png");
-        Texture walkRightTex = new Texture("assets/Microwave/WalkRight.png");
-        Texture aimDetectedRTex = new Texture("assets/Microwave/hitLeft.png");
-        Texture aimDetectedLTex = new Texture("assets/Microwave/Hit.png");
-        Texture deathTex = new Texture("assets/Microwave/Death.png");
-        Texture deathRightTex = new Texture("assets/Microwave/DeathRight.png");
-        Texture attackLeftTex = new Texture("assets/Microwave/Attack.png");
-        Texture attackRightTex = new Texture("assets/Microwave/AttackRight.png");
+        Texture stillLeftTex = new Texture("Microwave/Idle.png");
+        Texture stillRightTex = new Texture("Microwave/IdleRight.png");
+        Texture walkLeftTex = new Texture("Microwave/Walk.png");
+        Texture walkRightTex = new Texture("Microwave/WalkRight.png");
+        Texture aimDetectedRTex = new Texture("Microwave/hitLeft.png");
+        Texture aimDetectedLTex = new Texture("Microwave/Hit.png");
+        Texture deathTex = new Texture("Microwave/Death.png");
+        Texture deathRightTex = new Texture("Microwave/DeathRight.png");
+        Texture attackLeftTex = new Texture("Microwave/Attack.png");
+        Texture attackRightTex = new Texture("Microwave/AttackRight.png");
         TextureRegion[][] deathLeftFr = TextureRegion.split(deathTex, deathTex.getWidth() / 8, deathTex.getHeight() / 1);
         TextureRegion[] deathLeftFrames = new TextureRegion[7];
         TextureRegion[][] deathRightFr = TextureRegion.split(deathRightTex, deathRightTex.getWidth() / 8, deathRightTex.getHeight() / 1);
@@ -223,7 +223,7 @@ public class MicrowaveRobot extends Sprite {
             velocity.x = 0;
             fireballTime += delta;
             if (fireballTime > 1.8f && !death) {
-                Texture fireTex = new Texture("assets/Microwave/Fireball_loop.png");
+                Texture fireTex = new Texture("Microwave/Fireball_loop.png");
                 TextureRegion[][] fireFr = TextureRegion.split(fireTex, fireTex.getWidth() / 5, fireTex.getHeight() / 1);
                 Fireball fireball = new Fireball(fireFr, world, this);
                 fireballs.add(fireball);
@@ -233,9 +233,9 @@ public class MicrowaveRobot extends Sprite {
         else {
             targetDetected = false;
         }
-        for (Fireball fireball: fireballs) {
-            fireball.setMovement(delta, lastWayRight, listener);
-        }
+            for (Fireball fireball: fireballs) {
+                fireball.setMovement(delta, lastWayRight, listener);
+            }
 
         if (deathTime == 0) {
             body.applyForceToCenter(velocity, true);

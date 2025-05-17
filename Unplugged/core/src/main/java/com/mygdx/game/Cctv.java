@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 
@@ -79,7 +79,8 @@ public class Cctv extends Sprite{
             for(Vector2 ray: rays){
                 float angleRad = MathUtils.atan2(ray.y - eye.y, ray.x - eye.x);
                 float angleDeg = angleRad * MathUtils.radiansToDegrees;
-                boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < visionCone.getConeDegree();
+                boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < 360 && Math.abs(angleDeg - visionCone.getDirection()) > 270;
+                //boolean inCone = Math.abs(angleDeg - visionCone.getDirection()) < visionCone.getConeDegree();
 
                 System.out.println(inCone + "-" + isAnyTiledObjectOnLine(map, eye, ray, furnaces));
                 if(inCone && !isAnyTiledObjectOnLine(map, eye, ray, furnaces)){
@@ -95,7 +96,7 @@ public class Cctv extends Sprite{
     public boolean isPlayerInRadius(){
         Vector2 position = new Vector2(getX(), getY());
 
-        if(Math.abs(position.dst(player.getBox().getPosition())) < 120f){
+        if(Math.abs(position.dst(player.getBox().getPosition())) < 600f){
             return true;
         }
         

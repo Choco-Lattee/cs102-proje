@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ public class Droid extends Sprite{
     private ArrayList<Vector2> road;
     private ArrayList<Vector2> temp;
     private Body box;
-    private float speed = 3f;
+    private float speed = 20f;
     private int goalIndex = 1;
     private BodyDef boxDef;
     private FixtureDef fixtureDef;

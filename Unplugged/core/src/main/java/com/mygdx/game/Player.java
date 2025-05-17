@@ -1,4 +1,4 @@
-package io.github.some_example_name;
+package com.mygdx.game;
 
 import java.util.ArrayList;
 
@@ -135,7 +135,7 @@ public class Player extends Sprite implements InputProcessor{
 
     public void update(float delta){
 
-        if(contactListener.isOnCantactWithDroid()){
+        if(contactListener.isOnContactWithDroid()){
             isAlive = false;
             System.out.println("PLAYER DIED");
         }

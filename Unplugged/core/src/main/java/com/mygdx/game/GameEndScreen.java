@@ -57,7 +57,7 @@ public class GameEndScreen implements Screen{
         stage = new Stage(viewport);
 
 
-        Texture splashTexture = new Texture("assets/Background.png");
+        Texture splashTexture = new Texture("Background.png");
         splash = new Sprite(splashTexture);
         splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -65,15 +65,15 @@ public class GameEndScreen implements Screen{
 
         Gdx.input.setInputProcessor(stage);
 
-        atlas = new TextureAtlas("assets/button.atlas");
+        atlas = new TextureAtlas("button.atlas");
         skin = new Skin(atlas);
 
         table = new Table(skin);
         //table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.setFillParent(true);
 
-        white = new BitmapFont(Gdx.files.internal("assets/font/white.fnt"), false);
-        black = new BitmapFont(Gdx.files.internal("assets/font/black.fnt"), false);
+        white = new BitmapFont(Gdx.files.internal("font/white.fnt"), false);
+        black = new BitmapFont(Gdx.files.internal("font/black.fnt"), false);
 
         TextButtonStyle textButtonStyle = new TextButtonStyle();
         textButtonStyle.up = skin.getDrawable("button.normal");
@@ -86,7 +86,7 @@ public class GameEndScreen implements Screen{
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = white;
         labelStyle.fontColor = Color.WHITE;
-        label = new Label("!YOU WIN!", labelStyle);
+        label = new Label("!YOU*WIN!", labelStyle);
 
         ListStyle listStyle = new ListStyle();
         listStyle.font = white;
