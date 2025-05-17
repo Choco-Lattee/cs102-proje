@@ -11,7 +11,9 @@ Development:
   - Basic Box2D-based player character implemented.
     Created AnimationHandler class to manage character animations dynamically.
   - Light Puzzle Game:
-  - Detective Game:
+  - Detective Game: Initial game idea discussed (crime scene + interrogation phase).
+    Core game flow planned and divided into two phases.
+    Evidence and Suspect classes designed.
   - Menu Frames:
 
   week3:
@@ -22,7 +24,9 @@ Development:
   - Improved character controller and refined Box2D body properties.
   - Added support for directional movement and animation transitions.
   - Light Puzzle Game:
-  - Detective Game:
+  - Detective Game:CrimeSceneScreen created, background added, evidence item design initiated.
+    InputProcessor logic designed for evidence detection.
+    Timer-based gameplay logic planned.
   - Menu Frames:
 
   week4:
@@ -32,7 +36,10 @@ Development:
   - Implemented navigation logic between scenes with transition effects.
   - Refactored screen management to use a central ScreenController.
   - Light Puzzle Game:
-  - Detective Game:
+  - Detective Game:Evidence detection mechanics implemented.
+    EvidencePanel designed to display found clues.
+    Timer integrated into UI (90 seconds limit).
+    Evidence and CrimeSceneScreen interaction completed.
   - Menu Frames:
   
   week5:
@@ -42,7 +49,10 @@ Development:
   - Implemented basic file I/O system using LibGDX's Json class.
   - Created player state object and tested save/load across game sessions.
   - Light Puzzle Game:
-  - Detective Game:
+  - Detective Game:InterrogationScreen created with suspect portraits.
+    BlameButton implemented under each suspect.
+    Player can select suspects for accusation.
+    Correct/Incorrect accusation logic added.
   - Menu Frames:
 
   week6:
@@ -53,5 +63,7 @@ Development:
   - Expanded save/load system to support multiple save slots and game flags.
   - Addressed edge cases in loading mid-animation or during scene transitions.
   - Light Puzzle Game:
-  - Detective Game:
+  - Detective Game:GameEnd logic completed — transitions to Win/Loss screen based on player's choice.
+    VictoryScreen and GameOverScreen created.
+    Visual polish applied to InterrogationScreen and final flow fully integrated.
   - Menu Frames:
