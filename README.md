@@ -6,7 +6,7 @@ Development:
 
   week2:
   - No Meeting
-  - Stealth Game: Tiled map created, box2d player droid generated, animationHandler class added, game atlas has been created, box2d object parser added
+  - Stealth Game: Tiled map created, box2d player droid generated, animationHandler class added, game atlas has been created, tiled object parser added
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
