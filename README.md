@@ -26,7 +26,7 @@ Development:
   - Main Game:
   - Light Puzzle Game:
   - Detective Game:
-  -   - Menu Frames:
+  - Menu Frames:
   
   week5:
   - collisionListener discussed, pause menu is added to other games, 
